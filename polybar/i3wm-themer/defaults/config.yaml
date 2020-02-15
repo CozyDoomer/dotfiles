@@ -1,0 +1,5 @@
+i3-config: /home/christian/.config/i3/config
+polybar-config: /home/christian/.config/polybar/config
+xresources: /home/christian/.Xresources
+nitrogen-config: /home/christian/.config/nitrogen/bg-saved.cfg
+wallpaper-path: /home/christian/.config/nitrogen/

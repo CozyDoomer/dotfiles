@@ -1,10 +1,10 @@
-[bar/i3wmthemer_bar]
-
-bottom=true
+[bar/i3wmthemer_bar_main]
 monitor = ${env:MONITOR:}
 
+bottom=true
+
 width = 100%
-height = 22
+height = 26
 radius = 0
 fixed-center = false
 
@@ -23,17 +23,54 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Source Code Pro Semibold:size=10;1"
-
-font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:size=10;1"
-font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=10;1"
-font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=10;1"
+font-0 = "Source Code Pro Semibold:size=10;3"
+font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:size=10;3"
+font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=10;3"
+font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=10;3"
 
 modules-left = i3
-modules-center = date
-modules-right = memory filesystem cpu temperature pulseaudio powermenu
+modules-center = memory gap cpu gap cpu_temperature
+modules-right = pulseaudio gap date gap powermenu
 
-tray-position = ${env:TRAY_POS}
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[bar/i3wmthemer_bar_secondary]
+monitor = ${env:MONITOR:}
+
+bottom=true
+
+width = 100%
+height = 26
+radius = 0
+fixed-center = false
+
+background = #1d1f21
+foreground = #c5c8c6
+
+line-size = 3
+line-color =
+
+border-size = 0
+border-color =
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "Source Code Pro Semibold:size=10;3"
+font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:size=10;3"
+font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=10;3"
+font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=10;3"
+
+modules-left = i3
+modules-center = gpu_name gpu_driver gpu_memory gpu_util gpu_temperature gpu_fan gpu_power gpu_pstate 
+modules-right = filesystem
+
+tray-position = right
 tray-padding = 10
 wm-restack = i3
 override-redirect = false
@@ -72,6 +109,7 @@ label-urgent-background = #BA2922
 label-urgent-padding = 2
 
 [module/eth]
+monitor = ${env:MONITOR:}
 type = internal/network
 interface = enp7s0
 interval = 3.0
@@ -86,6 +124,7 @@ label-connected = %local_ip%
 format-disconnected =
 
 [module/date]
+monitor = ${env:MONITOR:}
 type = internal/date
 interval = 5
 
@@ -103,6 +142,7 @@ format-padding = 2
 label = %date% %time%
 
 [module/powermenu]
+monitor = ${env:MONITOR:}
 type = custom/menu
 
 expand-right = true
@@ -145,12 +185,8 @@ screenchange-reload = true
 margin-top = 0
 margin-bottom = 0
 
-
-font-2 = Font Awesome 5 Brands Regular:size=10;4
-font-3 = Font Awesome 5 Free Solid:size=10;4
-font-4 = Font Awesome 5 Free Regular:size=10;4
-
 [module/pulseaudio]
+monitor = ${env:MONITOR:}
 type = internal/pulseaudio
 
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
@@ -189,6 +225,7 @@ label-muted = 
 label-muted-foreground = #666
 
 [module/filesystem]
+monitor = ${env:MONITOR:}
 type = internal/fs
 
 ; Mountpoints to display
@@ -245,45 +282,13 @@ label-mounted = %{F#0a81f5}%mountpoint%%{F-}
 label-unmounted = %mountpoint%: not mounted
 label-unmounted-foreground = #55
 
-[module/cpu]
-type = internal/cpu
-
-; Seconds to sleep between updates
-; Default: 1
-interval = 0.5
-
-; Available tags:
-;   <label> (default)
-;   <bar-load>
-;   <ramp-load>
-;   <ramp-coreload>
-format = <label> <ramp-coreload>
-
-; Available tokens:
-;   %percentage% (default) - total cpu load averaged over all cores
-;   %percentage-sum% - Cumulative load on all cores
-;   %percentage-cores% - load percentage for each core
-;   %percentage-core[1-9]% - load percentage for specific core
-label = CPU %percentage%%
-
-; Spacing between individual per-core ramps
-ramp-coreload-spacing = 1
- 
-ramp-coreload-0 = %{F#00d800}▁%{F-}
-ramp-coreload-1 = %{F#3dd600}▂%{F-}
-ramp-coreload-2 = %{F#79d300}▃%{F-}
-ramp-coreload-3 = %{F#b3d100}▄%{F-}
-ramp-coreload-4 = %{F#ceb100}▅%{F-}
-ramp-coreload-5 = %{F#cc7400}▆%{F-}
-ramp-coreload-6 = %{F#c93a00}▇%{F-}
-ramp-coreload-7 = %{F#c70000}█%{F-}
-
 [module/memory]
+monitor = ${env:MONITOR:}
 type = internal/memory
 
 ; Seconds to sleep between updates
 ; Default: 1
-interval = 3
+interval = 1
 
 ; Available tags:
 ;   <label> (default)
@@ -315,45 +320,61 @@ format = <label> <bar-used>
 ;   %gb_swap_free%
 ;   %gb_swap_used%
 
-label = RAM %gb_used%/%gb_free%
+label = %{F#b0f2bc}RAM%{F-}  %gb_used%/%gb_free%
 
 ; Only applies if <bar-used> is used
 bar-used-indicator =
-bar-used-width = 20
-bar-used-foreground-0 = #55aa55
-bar-used-foreground-1 = #557755
-bar-used-foreground-2 = #f5a70a
-bar-used-foreground-3 = #ff5555
+bar-used-width = 40
+
+bar-used-foreground-0 = #3dd600
+bar-used-foreground-1 = #b3d100
+bar-used-foreground-2 = #cc7400
+bar-used-foreground-3 = #c70000
 bar-used-fill = ▐
 bar-used-empty = ▐
 bar-used-empty-foreground = #444444
 
-; Only applies if <ramp-used> is used
-ramp-used-0 = ▁
-ramp-used-1 = ▂
-ramp-used-2 = ▃
-ramp-used-3 = ▄
-ramp-used-4 = ▅
-ramp-used-5 = ▆
-ramp-used-6 = ▇
-ramp-used-7 = █
+[module/cpu]
+monitor = ${env:MONITOR:}
+type = internal/cpu
 
-; Only applies if <ramp-free> is used
-ramp-free-0 = ▁
-ramp-free-1 = ▂
-ramp-free-2 = ▃
-ramp-free-3 = ▄
-ramp-free-4 = ▅
-ramp-free-5 = ▆
-ramp-free-6 = ▇
-ramp-free-7 = █
+; Seconds to sleep between updates
+; Default: 1
+interval = 1
 
-[module/temperature]
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label> <ramp-coreload>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = %{F#4cc8a3}CPU%{F-}  %percentage%%
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
+
+ramp-coreload-0 = %{F#00d800}▁%{F-}
+ramp-coreload-1 = %{F#3dd600}▂%{F-}
+ramp-coreload-2 = %{F#79d300}▃%{F-}
+ramp-coreload-3 = %{F#b3d100}▄%{F-}
+ramp-coreload-4 = %{F#ceb100}▅%{F-}
+ramp-coreload-5 = %{F#cc7400}▆%{F-}
+ramp-coreload-6 = %{F#c93a00}▇%{F-}
+ramp-coreload-7 = %{F#c70000}█%{F-}
+
+[module/cpu_temperature]
+monitor = ${env:MONITOR:}
 type = internal/temperature
 
 ; Seconds to sleep between updates
 ; Default: 1
-interval = 0.5
+interval = 1
 
 ; Thermal zone to use
 ; To list all the zone types, run 
@@ -394,7 +415,7 @@ format-warn = <label-warn>
 ;   %temperature% (deprecated)
 ;   %temperature-c%   (default, temperature in °C)
 ;   %temperature-f%   (temperature in °F)
-label = %temperature-c% °C
+label = %{F#2c98a0}TEMP%{F-}  %temperature-c% °C
 label-foreground = #0a81f5
 
 ; Available tokens:
@@ -403,3 +424,42 @@ label-foreground = #0a81f5
 ;   %temperature-f%   (temperature in °F)
 label-warn = %temperature-c% °C
 label-warn-foreground = #f00
+
+[module/gpu_name]
+type = custom/script
+exec = nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits | awk '{ print "%{F#d3f2a3}GPU  %{F-}  %{F#b0f2bc}NAME%{F-}",""$1" "$2" "$3""}'
+interval = 60
+
+[module/gpu_driver]
+type = custom/script
+exec = nvidia-smi --query-gpu=driver_version --format=csv,noheader,nounits | awk '{ print "%{F#89e8ac}DRIVER%{F-}",""$1""}'
+interval = 60
+
+[module/gpu_memory]
+type = custom/script
+exec = nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits | awk '{ print "%{F#67dba5}MEM%{F-}",""int( $1 )" / "$2" MiB"}'
+interval = 1
+
+[module/gpu_util]
+type = custom/script
+exec = nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{ print "%{F#4cc8a3}UTIL%{F-}",""$1"%"}'
+interval = 1
+
+[module/gpu_temperature]
+type = custom/script
+exec = nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{ print "%{F#38b2a3}TEMP%{F-}",""$1"°C"}'
+interval = 1
+
+[module/gpu_fan]
+type = custom/script
+exec = nvidia-smi --query-gpu=fan.speed --format=csv,noheader,nounits | awk '{ print "%{F#2c98a0}FAN%{F-}",""$1""}'
+interval = 1
+
+[module/gpu_power]
+type = custom/script
+exec = nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits | awk '{ print "%{F#0c82cc}DRAIN%{F-}",""$1""}'
+interval = 1
+
+[module/gap]
+type = custom/text
+content = "   "

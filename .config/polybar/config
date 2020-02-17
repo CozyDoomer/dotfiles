@@ -320,7 +320,7 @@ format = <label> <bar-used>
 ;   %gb_swap_free%
 ;   %gb_swap_used%
 
-label = %{F#b0f2bc}RAM%{F-}  %gb_used%/%gb_free%
+label = %{F#b0f2bc}RAM%{F-}  %gb_used%/%gb_total%
 
 ; Only applies if <bar-used> is used
 bar-used-indicator =

@@ -1,2 +1,2 @@
 cd i3wm-themer
-./change.sh manjaro
+bash change.sh manjaro

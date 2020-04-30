@@ -1,5 +1,10 @@
 {
     "editor.emptySelectionClipboard": false,
-    "window.zoomLevel": 0,
-    "workbench.colorTheme": "Night Owl (No Italics)"
+    "window.zoomLevel": -0.4772413011367769,
+    "workbench.colorTheme": "Dracula",
+    "terminal.integrated.shell.linux": "/bin/fish",
+    "files.exclude": {
+        "**/.git": false
+    },
+    "python.dataScience.askForKernelRestart": false
 }

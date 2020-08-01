@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+bgs=(~/.config/nitrogen/*)
+
+select bg in ${bgs[@]}
+do
+    bash ~/.config/rice/wal -i $bg
+    break
+done
+
+# add colors to environment
+source ~/.cache/wal/colors.sh
+
+export RAM_LABEL="%{u$color9}%{F$color9}RAM%{F-}  %gb_used%/%gb_total%%{u-}"
+export CPU_LABEL="%{u$color10}%{F$color10}CPU%{F-}  %percentage%%{u-}"
+export TEMP_LABEL="%{u$color11}%{F$color11}TEMP%{F-}  %temperature-c% °C%{u-}"
+
+bash ~/.config/rice/polybar_launch

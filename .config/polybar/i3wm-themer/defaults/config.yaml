@@ -1,5 +1,0 @@
-i3-config: ~/.config/i3/config
-polybar-config: ~/.config/polybar/config
-xresources: ~/.Xresources
-nitrogen-config: ~/.config/nitrogen/bg-saved.cfg
-wallpaper-path: ~/.config/nitrogen/

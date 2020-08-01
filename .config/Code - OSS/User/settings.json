@@ -6,5 +6,6 @@
     "files.exclude": {
         "**/.git": false
     },
-    "python.dataScience.askForKernelRestart": false
+    "python.dataScience.askForKernelRestart": false,
+    "autoDocstring.docstringFormat": "numpy"
 }

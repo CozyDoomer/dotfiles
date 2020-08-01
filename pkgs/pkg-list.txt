@@ -1,0 +1,17 @@
+code
+firefox
+fish
+libreoffice-still
+docker
+discord
+
+polybar
+rofi
+nitrogen
+ttf-font-awesome
+
+cuda
+cudnn
+
+aws-cli
+

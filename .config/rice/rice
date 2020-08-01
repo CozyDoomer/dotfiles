@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-bgs=(~/.config/nitrogen/*)
+bg=${1:-"/home/christian/.config/nitrogen/vaporwave.jpg"}    
 
-select bg in ${bgs[@]}
-do
-    bash ~/.config/rice/wal -i $bg
-    break
-done
+bash ~/.config/rice/wal -i $bg
 
 # add colors to environment
 source ~/.cache/wal/colors.sh

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bg=${1:-"$HOME/.config/nitrogen/vaporwave.jpg"}    
+bg=${1:-"~/.config/nitrogen/vaporwave.jpg"}    
 
 bash ~/.config/rice/wal -i $bg
 

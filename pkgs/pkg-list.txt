@@ -4,6 +4,7 @@ fish
 libreoffice-still
 docker
 discord
+flameshot
 
 polybar
 rofi

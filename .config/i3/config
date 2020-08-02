@@ -207,7 +207,7 @@ mode "resize" {
 }
 
 # Autostart applications
-exec_always --no-startup-id ~/.config/rice/rice leaf_lake.png
+exec_always --no-startup-id source $HOME/.config/rice/rice $HOME/.config/nitrogen/leaf_lake.png
 exec_always --no-startup-id nitrogen --restore; killall picom; sleep 0.1; picom
 exec --no-startup-id nm-applet
 # exec --no-startup-id xfce4-power-manager

@@ -217,10 +217,6 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
 exec --no-startup-id firefox
-assign [class="(?i)firefox"] → $ws1
-
-exec --no-startup-id pcmanfm
-assign [class="(?i)pcmanfm"] → $ws2
 
 # Gaps
 gaps inner 10

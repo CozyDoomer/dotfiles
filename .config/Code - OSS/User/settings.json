@@ -1,11 +1,22 @@
 {
     "editor.emptySelectionClipboard": false,
-    "window.zoomLevel": -0.4772413011367769,
+    "window.zoomLevel": -0.5227586988632231,
     "workbench.colorTheme": "Dracula",
     "terminal.integrated.shell.linux": "/bin/fish",
     "files.exclude": {
         "**/.git": false
     },
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=120"],
     "python.dataScience.askForKernelRestart": false,
-    "autoDocstring.docstringFormat": "numpy"
+    "python.dataScience.sendSelectionToInteractiveWindow": false,
+    "autoDocstring.docstringFormat": "numpy",
+    "autoDocstring.generateDocstringOnEnter": false,
+    "files.associations": {
+        "[Dd]ockerfile*": "dockerfile",
+        "docker-compose*": "yaml"
+    },
+    "sync.gist": "d2f5e711d9423b4b5147f6cc127425fe"
 }

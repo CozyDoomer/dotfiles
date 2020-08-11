@@ -18,5 +18,6 @@
         "[Dd]ockerfile*": "dockerfile",
         "docker-compose*": "yaml"
     },
-    "sync.gist": "d2f5e711d9423b4b5147f6cc127425fe"
+    "sync.gist": "d2f5e711d9423b4b5147f6cc127425fe",
+    "editor.multiCursorModifier": "ctrlCmd"
 }

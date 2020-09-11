@@ -1,6 +1,7 @@
 code
 firefox
 fish
+pulseaudio
 libreoffice-still
 docker
 discord

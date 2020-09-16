@@ -13,7 +13,7 @@ font xft:URWGothic-Book 11
 
 floating_modifier $mod
 
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # Window kill command
 bindsym $mod+Shift+q kill
@@ -124,6 +124,8 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
+bindsym Print exec flameshot gui
+
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Calamares"] floating enable border normal
@@ -207,8 +209,8 @@ mode "resize" {
 }
 
 # Autostart applications
-exec_always --no-startup-id source $HOME/.config/rice/rice $HOME/.config/nitrogen/leaf_lake.png
-exec_always --no-startup-id nitrogen --restore; killall picom; sleep 0.1; picom
+exec_always --no-startup-id python ~/.config/rice/rice.py ~/.config/nitrogen/color_prisms.png
+exec_always --no-startup-id killall picom; picom
 exec --no-startup-id nm-applet
 # exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray

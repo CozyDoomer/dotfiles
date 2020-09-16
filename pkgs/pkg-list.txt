@@ -1,11 +1,13 @@
 code
 firefox
+kitty
 fish
 pulseaudio
 libreoffice-still
 docker
 discord
 flameshot
+python-pywal
 
 polybar
 rofi

@@ -63,7 +63,7 @@ font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=10;3"
 font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=10;3"
 
 modules-left = i3
-modules-center = gpu_head gpu_name gpu_driver gpu_memory gpu_util gpu_temperature gpu_fan gpu_power
+modules-center = gpu_head sm_gap gpu_name sm_gap gpu_driver sm_gap gpu_memory sm_gap gpu_util sm_gap gpu_temperature sm_gap gpu_fan sm_gap gpu_power
 
 tray-position = right
 tray-padding = 10
@@ -77,6 +77,7 @@ cursor-scroll = ns-resize
 ram_label = ${env:RAM_LABEL}
 cpu_label = ${env:CPU_LABEL}
 temp_label = ${env:TEMP_LABEL}
+temp_label_warn = ${env:TEMP_LABEL_WARN}
 
 [module/i3]
 pin-workspaces = true
@@ -91,17 +92,17 @@ label-mode-background = #282a2e
 
 label-focused = %index%
 label-focused-background = #373b41
-label-focused-foreground = ${xrdb:i3wm.color4:#f0f0f0}
+label-focused-foreground = ${xrdb:i3wm.color5:#f0f0f0}
 label-focused-padding = 2
 
 label-unfocused = %index%
 label-unfocused-background = #282a2e
-label-unfocused-foreground = ${xrdb:i3wm.color7:#f0f0f0}
+label-unfocused-foreground = ${xrdb:i3wm.color6:#f0f0f0}
 label-unfocused-padding = 2
 
 label-visible = %index%
 label-visible-background = #282a2e
-label-visible-foreground = #c5c8c6
+label-visible-foreground = ${xrdb:i3wm.color6:#f0f0f0}
 label-visible-padding = 2
 
 label-urgent = %index%
@@ -217,10 +218,10 @@ label = ${labels.ram_label}
 bar-used-indicator =
 bar-used-width = 40
 
-bar-used-foreground-0 = ${xrdb:i3wm.color2:#f0f0f0}
-bar-used-foreground-1 = ${xrdb:i3wm.color1:#f0f0f0}
-bar-used-foreground-2 = ${xrdb:i3wm.color4:#f0f0f0}
-bar-used-foreground-3 = ${xrdb:i3wm.color3:#f0f0f0}
+bar-used-foreground-0 = #00d800
+bar-used-foreground-1 = #b3d100
+bar-used-foreground-2 = #cc7400
+bar-used-foreground-3 = #c70000
 bar-used-fill = ▐
 bar-used-empty = ▐
 bar-used-empty-foreground = #444444
@@ -254,11 +255,11 @@ interval = 1
 
 thermal-zone = 1
 
-hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp2_input
 
 base-temperature = 50
 
-warn-temperature = 70
+warn-temperature = 80
 
 units = false
 
@@ -269,7 +270,7 @@ format-warn = <label-warn>
 label = ${labels.temp_label}
 label-foreground = #0a81f5
 
-label-warn = %temperature-c% °C
+label-warn = ${labels.temp_label_warn}
 label-warn-foreground = #f00
 
 [module/gpu_head]
@@ -316,3 +317,7 @@ interval = 1
 [module/gap]
 type = custom/text
 content = "   "
+
+[module/sm_gap]
+type = custom/text
+content = " "

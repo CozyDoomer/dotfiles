@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-bgs=(~/.config/nitrogen/*)
-
-select bg in ${bgs[@]}
-do
-    bash ~/.config/rice/rice $bg
-done

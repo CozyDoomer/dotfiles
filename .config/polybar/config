@@ -232,7 +232,7 @@ type = internal/cpu
 
 interval = 1
 
-format = <label> <ramp-coreload>
+format = <label>  <ramp-coreload>
 
 label = ${labels.cpu_label}
 
@@ -301,7 +301,7 @@ interval = 1
 
 [module/gpu_temperature]
 type = custom/script
-exec = nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk -v color6="$color6" '{ print "%{u"color6"}%{F"color6"}TEMP%{F-}",""sprintf("%3d", $1)"°C%{u-}"}'
+exec = nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk -v color6="$color6" '{ print "%{u"color6"}%{F"color6"}TEMP%{F-}",""sprintf("%3d", $1)" °C%{u-}"}'
 interval = 1
 
 [module/gpu_fan]
@@ -311,7 +311,7 @@ interval = 1
 
 [module/gpu_power]
 type = custom/script
-exec = nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits | awk -v color8="$color8" '{ print "%{u"color8"}%{F"color8"}DRAIN%{F-}",""sprintf("%3.2f", $1)"%{u-}"}'
+exec = nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits | awk -v color8="$color8" '{ print "%{u"color8"}%{F"color8"}DRAIN%{F-}",""sprintf("%6.2f", $1)"%{u-}"}'
 interval = 1
 
 [module/gap]

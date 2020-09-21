@@ -19,7 +19,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 10
 
 # change focus
 bindsym $mod+j focus left
@@ -209,8 +209,9 @@ mode "resize" {
 }
 
 # Autostart applications
-exec_always --no-startup-id python ~/.config/rice/rice.py ~/.config/nitrogen/color_prisms.png
-exec_always --no-startup-id killall picom; picom
+exec_always --no-startup-id python ~/.config/rice/rice.py ~/.config/nitrogen/rainbow_prisms.png
+exec_always --no-startup-id killall picom; sleep 0.1; picom
+exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 # exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray

@@ -64,6 +64,7 @@ font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=10;
 
 modules-left = i3
 modules-center = gpu_head sm_gap gpu_name sm_gap gpu_driver sm_gap gpu_memory sm_gap gpu_util sm_gap gpu_temperature sm_gap gpu_fan sm_gap gpu_power
+# modules-right = rofi
 
 tray-position = right
 tray-padding = 10
@@ -313,6 +314,15 @@ interval = 1
 type = custom/script
 exec = nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits | awk -v color8="$color8" '{ print "%{u"color8"}%{F"color8"}DRAIN%{F-}",""sprintf("%6.2f", $1)"%{u-}"}'
 interval = 1
+
+[module/rofi]
+type = custom/text
+content = MENU
+click-left = rofi -show run -location 1 -xoffset 39 -yoffset 73
+click-right = rofi -show window -location 1 -xoffset 39 -yoffset 73
+enable-click = true
+content-foreground = ${xrdb:i3wm.color11:#f0f0f0}
+content-padding = 2
 
 [module/gap]
 type = custom/text

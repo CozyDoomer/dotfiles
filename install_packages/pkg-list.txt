@@ -7,6 +7,7 @@ libreoffice-still
 docker
 discord
 flameshot
+redshift
 python-pywal
 
 polybar
@@ -18,4 +19,3 @@ cuda
 cudnn
 
 aws-cli
-

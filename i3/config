@@ -1,4 +1,4 @@
-set $mod Mod4
+set $mod Mod1
 
 new_window pixel 1
 new_float normal
@@ -208,9 +208,16 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
+# switch monitors
+exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-0
+
 # Autostart applications
 exec_always --no-startup-id python ~/.config/rice/rice.py ~/.config/nitrogen/rainbow_prisms.png
 exec_always --no-startup-id killall picom; sleep 0.1; picom
+
+# Call 'feh' to set the wallpaper.
+exec_always --no-startup-id /usr/bin/feh --bg-scale --no-xinerama "$(< "${HOME}/.cache/wal/wal")"
+
 exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 # exec --no-startup-id xfce4-power-manager
@@ -298,6 +305,3 @@ client.urgent           $bg     $bg     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
-
-# switch monitors
-exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-0

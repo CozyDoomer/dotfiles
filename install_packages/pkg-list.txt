@@ -8,6 +8,7 @@ docker
 discord
 flameshot
 redshift
+feh
 python-pywal
 
 polybar

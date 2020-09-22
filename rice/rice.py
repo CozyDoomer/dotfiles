@@ -55,7 +55,7 @@ def restart_polybar(main_monitor_name):
 
 def launch_rice(wallpaper_path, main_monitor_name='DVI-D-0'):
     # launch pywal to set colors and have access to them in cache
-    os.system(f'wal -i {wallpaper_path}')
+    os.system(f'wal -i {wallpaper_path} -n')
 
     # set colors in env
     home = os.path.expanduser('~')

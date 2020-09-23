@@ -20,103 +20,66 @@ configuration {
 }
 
 #window {
-    background-color: @background;
-    border:           2;
-    border-radius: 4;
-    border-color: @bordercolor;
-    padding:          5;
-    width:25%;
+    height:   100%;
+    width: 24em;
+    location: west;
+    anchor:   west;
+    border:  0px 2px 0px 0px;
+    text-color: @lightwhite;
 }
-#mainbox {
-    border:  0;
-    padding: 0;
+
+#mode-switcher {
+    border: 2px 0px 0px 0px;
+    background-color: @lightblack;
+    padding: 4px;
 }
-#message {
-    border:       1px dash 0px 0px ;
-    border-color: @separatorcolor;
-    padding:      1px ;
-}
-#textbox {
-    text-color: @foreground;
-}
-#listview {
-    fixed-height: 0;
-    border:       2px dash 0px 0px ;
-    border-color: @bordercolor;
-    spacing:      2px ;
-    scrollbar:    false;
-    padding:      2px 0px 0px ;
-}
-#element {
-    border:  0;
-    padding: 1px ;
-}
-#element.normal.normal {
-    background-color: @background;
-    text-color:       @foreground;
-}
-#element.normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-#element.normal.active {
-    background-color: @active-background;
-    text-color:       @foreground;
-}
-#element.selected.normal {
-    background-color: @selected-background;
-    text-color:       @foreground;
-}
-#element.selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color:       @foreground;
-}
-#element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @foreground;
-}
-#element.alternate.normal {
-    background-color: @background;
-    text-color:       @foreground;
-}
-#element.alternate.urgent {
-    background-color: @urgent-background;
-    text-color:       @foreground;
-}
-#element.alternate.active {
-    background-color: @active-background;
-    text-color:       @foreground;
-}
-#scrollbar {
-    width:        2px ;
-    border:       0;
-    handle-width: 8px ;
-    padding:      0;
-}
-#sidebar {
-    border:       2px dash 0px 0px ;
-    border-color: @separatorcolor;
-}
-#button.selected {
-    background-color: @selected-background;
-    text-color:       @foreground;
-}
-#inputbar {
-    spacing:    0;
-    text-color: @foreground;
-    padding:    1px ;
-}
-#case-indicator {
-    spacing:    0;
-    text-color: @foreground;
+#button selected {
+    border-color: @lightgreen;
+    text-color: @lightgreen;
 }
 #entry {
-    spacing:    0;
-    text-color: @foreground;
+    width: 20em;
 }
-#prompt {
-    spacing:    0;
-    text-color: @foreground;
+#inputbar {
+    background-color: @lightblack;
+    text-color: @lightgreen;
+    padding: 4px;
+    border: 0px 0px 2px 0px;
+}
+#mainbox {
+    expand: true;
+    background-color: @lightblack;
+    spacing: 1em;
+}
+#listview {
+    padding: 0em 0.4em 0em 1em;
+    dynamic: false;
+    lines: 0;
+}
+#element selected  normal {
+    background-color: @blue;
+}
+#element normal active {
+    text-color: @lightblue;
+}
+#element normal urgent {
+    text-color: @lightred;
+}
+#element alternate normal {
+}
+#element alternate active {
+    text-color: @lightblue;
+}
+#element alternate urgent {
+    text-color: @lightred;
+}
+#element selected active {
+    background-color: @lightblue;
+    text-color: @dark;
+}
+#element selected urgent {
+    background-color: @lightred;
+    text-color: @dark;
 }
 #inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
@@ -125,5 +88,5 @@ configuration {
     expand:     false;
     str:        ":";
     margin:     0px 0.3em 0em 0em ;
-    text-color: @foreground;
+    text-color: @normal-foreground;
 }

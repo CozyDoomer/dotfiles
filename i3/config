@@ -212,12 +212,10 @@ mode "resize" {
 exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-0
 
 # Autostart applications
-exec_always --no-startup-id python ~/.config/rice/rice.py ~/.config/nitrogen/rainbow_prisms.png
-exec_always --no-startup-id killall picom; sleep 0.1; picom
+exec_always --no-startup-id python ~/.config/rice/rice.py
+exec_always --no-startup-id killall picom; sleep 0.1; picom; sleep 0.1;
 
-# Call 'feh' to set the wallpaper.
-exec_always --no-startup-id /usr/bin/feh --bg-scale --no-xinerama "$(< "${HOME}/.cache/wal/wal")"
-
+exec --no-startup-id export EDITOR="/usr/bin/code"
 exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 # exec --no-startup-id xfce4-power-manager

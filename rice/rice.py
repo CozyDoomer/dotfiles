@@ -1,22 +1,10 @@
 import os
 import re
-import time
 import json
 import argparse
 import subprocess
 
-
-def parse_cli_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        'wallpaper_path',
-        nargs='?',
-        type=str,
-        default='~/.config/nitrogen/color_prisms.png',
-        help='path to a wallpaper image'
-    )
-    args = parser.parse_args()
-    return args
+from wallpaper import wp_path
 
 
 def set_colors_env_var(colors_config):
@@ -64,6 +52,22 @@ def launch_rice(wallpaper_path, main_monitor_name='DVI-D-0'):
 
     # restart_polybar polybar
     restart_polybar(main_monitor_name)
+
+    # Call 'feh' to set the wallpaper.
+    os.system(f'/usr/bin/feh --bg-scale --no-xinerama {wallpaper_path}')
+
+
+def parse_cli_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'wallpaper_path',
+        nargs='?',
+        type=str,
+        default=wp_path,
+        help='path to a wallpaper image'
+    )
+    args = parser.parse_args()
+    return args
 
 
 def main():

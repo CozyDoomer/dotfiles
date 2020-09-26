@@ -9,7 +9,9 @@ discord
 flameshot
 redshift
 feh
+galculator
 python-pywal
+python-i3ipc
 
 polybar
 rofi

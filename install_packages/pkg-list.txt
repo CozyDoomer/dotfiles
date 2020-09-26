@@ -1,22 +1,23 @@
 code
 firefox
-kitty
-fish
 pulseaudio
-libreoffice-still
 docker
+libreoffice-still
 discord
 flameshot
-redshift
-feh
 galculator
-python-pywal
-python-i3ipc
+
+kitty
+fish
 
 polybar
 rofi
+redshift
 nitrogen
-ttf-font-awesome
+feh
+python-pywal
+python-i3ipc
+nerd-fonts-terminus
 
 cuda
 cudnn

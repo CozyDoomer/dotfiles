@@ -11,11 +11,15 @@ def set_colors_env_var(colors_config):
     colors_dict = colors_config['colors']
     for name, hex_color in colors_dict.items():
         os.environ[name] = hex_color
+    
+    color4 = list(colors_dict.values())[4]
+    color6 = list(colors_dict.values())[6]
+    color8 = list(colors_dict.values())[8]
 
-    os.environ['RAM_LABEL'] = '%{u' + list(colors_dict.values())[4] + '}%{F' + list(colors_dict.values())[4] + '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
-    os.environ['CPU_LABEL'] = '%{u' + list(colors_dict.values())[6] + '}%{F' + list(colors_dict.values())[6] + '}CPU%{F-}  %percentage:3% %%{u-}'
-    os.environ['TEMP_LABEL'] = '%{u' + list(colors_dict.values())[8] + '}%{F' + list(colors_dict.values())[8] + '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
-    os.environ['TEMP_LABEL_WARN'] = '%{u' + list(colors_dict.values())[8] + '}%{F' + list(colors_dict.values())[8] + '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}'
+    os.environ['RAM_LABEL'] = '%{u' + color4 + '}%{F' + color4 + '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
+    os.environ['CPU_LABEL'] = '%{u' + color6 + '}%{F' + color6 + '}CPU%{F-}  %percentage:3% %%{u-}'
+    os.environ['TEMP_LABEL'] = '%{u' + color8 + '}%{F' + color8 + '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
+    os.environ['TEMP_LABEL_WARN'] = '%{u' + color8 + '}%{F' + color8 + '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}'
 
 
 def restart_polybar(main_monitor_name):

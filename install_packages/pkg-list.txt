@@ -1,9 +1,10 @@
 code
 firefox
-pulseaudio
-docker
 libreoffice-still
 discord
+steam
+pulseaudio
+docker
 flameshot
 galculator
 

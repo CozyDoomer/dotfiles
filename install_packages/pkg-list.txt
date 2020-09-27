@@ -13,10 +13,10 @@ fish
 polybar
 rofi
 redshift
-nitrogen
 feh
 python-pywal
 python-i3ipc
+sassc
 nerd-fonts-terminus
 
 cuda

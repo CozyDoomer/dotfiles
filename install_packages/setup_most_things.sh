@@ -9,6 +9,13 @@ pamac build aws-cdk
 pamac build anydesk-bin
 pamac build teams
 pamac build i3-gaps-rounded-git
+pamac build python-pywalfox
+pywalfox setup
+pamac build beautifuldiscord
+git clone https://github.com/guglicap/wal-discord.git
+chmod +x ./wal-discord/wal-discord
+sudo ln -s "${PWD}/wal-discord/wal-discord" /usr/bin/
+discord && wal-discord; beautifuldiscord --css ~/.cache/wal-discord/style.css
 
 # start docker service, add it to autostart create docker group and add user
 systemctl start docker.service

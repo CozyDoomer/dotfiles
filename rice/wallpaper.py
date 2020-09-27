@@ -1,1 +1,1 @@
-wp_path = '~/.config/nitrogen/2-monitors/sunset_forest.jpg'
+wp_path = '~/.config/wallpapers/2-monitors/sunset_forest'

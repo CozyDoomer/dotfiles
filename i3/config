@@ -2,11 +2,19 @@ set $mod Mod4
 
 for_window [class="^.*"] border pixel 2
 
+# Gaps
+gaps inner 10
+gaps outer -4
+
+# smart_gaps on
+
+# Rounded corners
+border_radius 2
+
 hide_edge_borders none
 
 bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+bindsym $mod+n border pixel 2
 
 font xft:URWGothic-Book 11
 
@@ -134,7 +142,6 @@ for_window [title="i3_help"] floating enable sticky enable
 for_window [class="Lxappearance"] floating enable sticky enable
 for_window [class="Manjaro-hello"] floating enable
 for_window [class="Manjaro Settings Manager"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable
 for_window [class="Xfburn"] floating enable
@@ -196,9 +203,6 @@ mode "resize" {
 exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-0
 
 # Autostart applications
-exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
-exec_always --no-startup-id python ~/.config/rice/rice.py
-exec_always --no-startup-id killall picom; sleep 0.1; picom; sleep 0.1;
 
 exec --no-startup-id export EDITOR="/usr/bin/code"
 exec --no-startup-id redshift
@@ -210,15 +214,6 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
 exec --no-startup-id firefox
-
-# Gaps
-gaps inner 10
-gaps outer -4
-
-# smart_gaps on
-
-# Rounded corners
-border_radius 2
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -291,3 +286,10 @@ client.urgent           $bg     $bg     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
+
+# rice
+exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
+exec_always --no-startup-id python ~/.config/rice/rice.py
+exec_always --no-startup-id killall picom; sleep 0.1; picom;
+exec_always --no-startup-id sleep 0.4; pywalfox update
+exec_always --no-startup-id wal-discord; beautifuldiscord --css ~/.cache/wal-discord/style.css

@@ -4,9 +4,7 @@ export VISUAL="code"
 export EDITOR="nvim"
 export BROWSER="firefox"
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
-export XDG_CURRENT_DESKTOP="KDE"
+source ~/.cache/wal/colors.fish
 
 # Use rg instead of ag / ack / grep for fzf (much faster)
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
@@ -73,8 +71,3 @@ if status --is-login
         exec startx -- -keeptty
     end
 end
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /home/christian/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<

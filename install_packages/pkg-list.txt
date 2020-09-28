@@ -9,7 +9,9 @@ flameshot
 galculator
 
 kitty
+neovim
 fish
+exa
 
 polybar
 rofi

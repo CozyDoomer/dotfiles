@@ -3,8 +3,8 @@ set $mod Mod4
 for_window [class="^.*"] border pixel 2
 
 # Gaps
-gaps inner 10
-gaps outer -4
+gaps inner 15
+gaps outer 5
 
 # smart_gaps on
 
@@ -293,3 +293,4 @@ exec_always --no-startup-id python ~/.config/rice/rice.py
 exec_always --no-startup-id killall picom; sleep 0.1; picom;
 exec_always --no-startup-id sleep 0.4; pywalfox update
 exec_always --no-startup-id wal-discord; beautifuldiscord --css ~/.cache/wal-discord/style.css
+exec_always --no-startup-id wal_steam -w

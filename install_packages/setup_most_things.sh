@@ -21,7 +21,8 @@ discord; wal-discord; beautifuldiscord --css ~/.cache/wal-discord/style.css
 cd ../install_packages
 
 pamac build python-wal-steam-git
-wal_steam -d -w -u
+wal_steam -d -u
+wal_steam -w
 
 # start docker service, add it to autostart create docker group and add user
 systemctl start docker.service

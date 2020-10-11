@@ -200,10 +200,9 @@ mode "resize" {
 }
 
 # switch monitors
-exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-0
+exec_always --no-startup-id xrandr --output HDMI-0 --mode 2560x1440 --right-of DVI-D-0 --auto
 
 # Autostart applications
-
 exec --no-startup-id export EDITOR="/usr/bin/code"
 exec --no-startup-id redshift
 exec --no-startup-id nm-applet

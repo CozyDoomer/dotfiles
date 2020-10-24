@@ -200,7 +200,7 @@ mode "resize" {
 }
 
 # switch monitors
-exec_always --no-startup-id xrandr --output HDMI-0 --mode 2560x1440 --right-of DVI-D-0 --auto
+exec --no-startup-id xrandr --output DP-4 --right-of HDMI-0 --mode 2560x1440
 
 # Autostart applications
 exec --no-startup-id export EDITOR="/usr/bin/code"

@@ -15,6 +15,7 @@ exa
 
 polybar
 rofi
+rofi-calc
 redshift
 feh
 python-pywal

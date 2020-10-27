@@ -27,6 +27,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -config ~/.config/rofi/config.rasi
+bindsym $mod+c exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort > /dev/null -config ~/.config/rofi/config.rasi
 
 # change focus
 bindsym $mod+j focus left

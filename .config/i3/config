@@ -27,7 +27,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -config ~/.config/rofi/config.rasi
-bindsym $mod+c exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort > /dev/null -config ~/.config/rofi/config.rasi
+bindsym $mod+Ctrl+d exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort > /dev/null -config ~/.config/rofi/config.rasi
 
 # change focus
 bindsym $mod+j focus left
@@ -274,9 +274,9 @@ bindsym $mod+Ctrl+Shift+Right move workspace to output right
 # from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources for some reason.
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color3 #f0f0f0
-set_from_resource $bd i3wm.color4 #f0f0f0
+set_from_resource $fg i3wm.color1 #f0f0f0
+set_from_resource $bg i3wm.color4 #f0f0f0
+set_from_resource $bd i3wm.color3 #f0f0f0
 
 # class                 border  backgr. text indicator child_border
 client.focused          $bg     $bg     $fg  $bg       $bd
@@ -289,8 +289,7 @@ client.background       $bg
 
 # rice
 exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
-exec_always --no-startup-id python ~/.config/rice/rice.py
+exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/rainbow_prisms.png'
 exec_always --no-startup-id killall picom; sleep 0.1; picom;
 exec_always --no-startup-id sleep 0.4; pywalfox update
-exec_always --no-startup-id wal-discord; beautifuldiscord --css ~/.cache/wal-discord/style.css
 exec_always --no-startup-id wal_steam -w

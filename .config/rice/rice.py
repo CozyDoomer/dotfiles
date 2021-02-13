@@ -16,11 +16,11 @@ def set_colors_env_var(colors_config):
     color6 = list(colors_dict.values())[6]
     color8 = list(colors_dict.values())[8]
 
-    os.environ['RAM_LABEL'] = '%{u' + color4 + '}%{F' + color4 + '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
-    os.environ['CPU_LABEL'] = '%{u' + color6 + '}%{F' + color6 + '}CPU%{F-}  %percentage:3% %%{u-}'
-    os.environ['TEMP_LABEL'] = '%{u' + color8 + '}%{F' + color8 + '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
+    os.environ['RAM_LABEL'] = '%{u' + color4 + '}%{+u}%{F' + color4 + '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
+    os.environ['CPU_LABEL'] = '%{u' + color6 + '}%{+u}%{F' + color6 + '}CPU%{F-}  %percentage:3% %%{u-}'
+    os.environ['TEMP_LABEL'] = '%{u' + color8 + '}%{+u}%{F' + color8 + '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
     os.environ['TEMP_LABEL_WARN'] = (
-        '%{u' + color8 + '}%{F' + color8 + '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}'
+        '%{u' + color8 + '}%{+u}%{F' + color8 + '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}'
     )
 
 
@@ -51,7 +51,7 @@ def restart_polybar(main_monitor_name):
             )
 
 
-def launch_rice(wallpaper_path, main_monitor_name='DVI-D-0'):
+def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
     home = os.path.expanduser('~')
 
     # find wallpaper path in case partial filename / no extension is given

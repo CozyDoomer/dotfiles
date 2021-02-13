@@ -2,7 +2,7 @@
 monitor = ${env:MONITOR:}
 
 width = 100%
-height = 28
+height = 30
 radius = 0
 fixed-center = false
 
@@ -21,10 +21,10 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Source Code Pro Semibold:size=10;3"
-font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:size=10;3"
-font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=10;3"
-font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=10;3"
+font-0 = "Source Code Pro Semibold:size=11;3"
+font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:size=11;3"
+font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=11;3"
+font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=11;3"
 
 modules-left = i3
 modules-center = memory gap cpu gap cpu_temperature
@@ -38,7 +38,7 @@ cursor-scroll = ns-resize
 monitor = ${env:MONITOR:}
 
 width = 100%
-height = 28
+height = 30
 radius = 0
 fixed-center = false
 
@@ -57,10 +57,10 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Source Code Pro Semibold:size=10;3"
-font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:size=10;3"
-font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=10;3"
-font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=10;3"
+font-0 = "Source Code Pro Semibold:size=11;3"
+font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:size=11;3"
+font-2 = "Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:size=11;3"
+font-3 = "Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:size=11;3"
 
 modules-left = i3
 modules-center = gpu_head sm_gap gpu_name sm_gap gpu_driver sm_gap gpu_memory sm_gap gpu_util sm_gap gpu_temperature sm_gap gpu_fan sm_gap gpu_power
@@ -93,17 +93,17 @@ label-mode-background = #282a2e
 
 label-focused = %index%
 label-focused-background = #373b41
-label-focused-foreground = ${xrdb:i3wm.color4:#f0f0f0}
+label-focused-foreground = ${xrdb:i3wm.color3:#f0f0f0}
 label-focused-padding = 2
 
 label-unfocused = %index%
 label-unfocused-background = #282a2e
-label-unfocused-foreground = ${xrdb:i3wm.color3:#f0f0f0}
+label-unfocused-foreground = ${xrdb:i3wm.color8:#f0f0f0}
 label-unfocused-padding = 2
 
 label-visible = %index%
 label-visible-background = #282a2e
-label-visible-foreground = ${xrdb:i3wm.color4:#f0f0f0}
+label-visible-foreground = ${xrdb:i3wm.color3:#f0f0f0}
 label-visible-padding = 2
 
 label-urgent = %index%
@@ -276,43 +276,43 @@ label-warn-foreground = #f00
 
 [module/gpu_head]
 type = custom/script
-exec = echo | awk -v color1="$color1" '{ print "%{u"color1"}%{F"color1"}GPU%{F-}%{u-}"}'
+exec = echo | awk -v color1="$color1" '{ print "%{u"color1"}%{+u}%{F"color1"}GPU%{F-}%{u-}"}'
 interval = 60
 
 [module/gpu_name]
 type = custom/script
-exec = nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits | awk -v color2="$color2" '{ print "%{u"color2"}%{F"color2"}NAME%{F-}",""$1" "$2" "$3"%{u-}"}'
+exec = nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits | awk -v color2="$color2" '{ print "%{u"color2"}%{+u}%{F"color2"}NAME%{F-}",""$1" "$2" "$3"%{u-}"}'
 interval = 60
 
 [module/gpu_driver]
 type = custom/script
-exec = nvidia-smi --query-gpu=driver_version --format=csv,noheader,nounits | awk -v color3="$color3" '{ print "%{u"color3"}%{F"color3"}DRIVER%{F-}",""$1"%{u-}"}'
+exec = nvidia-smi --query-gpu=driver_version --format=csv,noheader,nounits | awk -v color3="$color3" '{ print "%{u"color3"}%{+u}%{F"color3"}DRIVER%{F-}",""$1"%{u-}"}'
 interval = 60
 
 [module/gpu_memory]
 type = custom/script
-exec = nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits | awk -v color4="$color4" '{ print "%{u"color4"}%{F"color4"}MEM%{F-}",""sprintf("%4d", $1)" / "$2" MiB%{u-}"}'
+exec = nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits | awk -v color4="$color4" '{ print "%{u"color4"}%{+u}%{F"color4"}MEM%{F-}",""sprintf("%4d", $1)" / "$2" MiB%{u-}"}'
 interval = 1
 
 [module/gpu_util]
 type = custom/script
-exec = nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk -v color5="$color5" '{ print "%{u"color5"}%{F"color5"}UTIL%{F-}",""sprintf("%3d", $1)"%%{u-}"}'
+exec = nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk -v color5="$color5" '{ print "%{u"color5"}%{+u}%{F"color5"}UTIL%{F-}",""sprintf("%3d", $1)"%%{u-}"}'
 
 interval = 1
 
 [module/gpu_temperature]
 type = custom/script
-exec = nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk -v color6="$color6" '{ print "%{u"color6"}%{F"color6"}TEMP%{F-}",""sprintf("%3d", $1)" °C%{u-}"}'
+exec = nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk -v color6="$color6" '{ print "%{u"color6"}%{+u}%{F"color6"}TEMP%{F-}",""sprintf("%3d", $1)" °C%{u-}"}'
 interval = 1
 
 [module/gpu_fan]
 type = custom/script
-exec = nvidia-smi --query-gpu=fan.speed --format=csv,noheader,nounits | awk -v color7="$color7" '{ print "%{u"color7"}%{F"color7"}FAN%{F-}",""$1"%{u-}"}'
+exec = nvidia-smi --query-gpu=fan.speed --format=csv,noheader,nounits | awk -v color7="$color7" '{ print "%{u"color7"}%{+u}%{F"color7"}FAN%{F-}",""$1"%{u-}"}'
 interval = 1
 
 [module/gpu_power]
 type = custom/script
-exec = nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits | awk -v color8="$color8" '{ print "%{u"color8"}%{F"color8"}DRAIN%{F-}",""sprintf("%6.2f", $1)"%{u-}"}'
+exec = nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits | awk -v color8="$color8" '{ print "%{u"color8"}%{+u}%{F"color8"}DRAIN%{F-}",""sprintf("%6.2f", $1)"%{u-}"}'
 interval = 1
 
 [module/rofi]

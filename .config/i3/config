@@ -276,13 +276,9 @@ bindsym $mod+Ctrl+Shift+Down exec bash ~/.config/i3/i3_display_swap.sh
 bindsym $mod+Shift+Return exec kitty -e ranger
 
 # Set colors from Xresources
-# Change 'color7' and 'color2' to whatever colors you want i3 to use
-# from the generated scheme.
-# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
-# it fails to get colors from Xresources for some reason.
-set_from_resource $fg i3wm.color1 #f0f0f0
-set_from_resource $bg i3wm.color4 #f0f0f0
-set_from_resource $bd i3wm.color3 #f0f0f0
+set_from_resource $fg i3wm.color3 #f0f0f0
+set_from_resource $bg i3wm.color6 #f0f0f0
+set_from_resource $bd i3wm.color2 #f0f0f0
 
 # class                 border  backgr. text indicator child_border
 client.focused          $bg     $bg     $fg  $bg       $bd
@@ -293,9 +289,11 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
+exec --no-startup-id redshift-gtk
+exec --no-startup-id ~/.config/i3/alternating_layouts.py
+
 # rice
-exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
-exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/rainbow_prisms.png'
+exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 exec_always --no-startup-id killall picom; sleep 0.1; picom;
 exec_always --no-startup-id sleep 0.4; pywalfox update
 exec_always --no-startup-id wal_steam -w

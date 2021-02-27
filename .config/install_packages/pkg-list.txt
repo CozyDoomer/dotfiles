@@ -17,6 +17,7 @@ polybar
 rofi
 rofi-calc
 redshift
+timeshift
 feh
 python-pywal
 python-i3ipc

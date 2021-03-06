@@ -23,7 +23,7 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty
 
 # Window kill command
-bindsym $mod+Shift+q kill
+bindsym $mod+r kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -config ~/.config/rofi/config.rasi
@@ -53,8 +53,8 @@ bindsym $mod+Shift+Right move right
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
-bindsym $mod+b workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+space workspace back_and_forth
+bindsym $mod+Shift+space move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
 bindsym $mod+c split h;exec notify-send 'tile horizontally'
@@ -70,7 +70,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+b floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -151,16 +151,16 @@ for_window [class="Xfburn"] floating enable
 for_window [urgent=latest] focus
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+t restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
-bindsym $mod+0 mode "$mode_system"
+bindsym $mod+Shift+r mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
@@ -177,7 +177,7 @@ mode "$mode_system" {
 }
 
 # Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
+bindsym $mod+s mode "resize"
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
     # Pressing left will shrink the window’s width.
@@ -290,7 +290,7 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 client.background       $bg
 
 exec --no-startup-id redshift-gtk
-exec --no-startup-id ~/.config/i3/alternating_layouts.py
+exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
 
 # rice
 exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'

@@ -1,4 +1,4 @@
-code
+vscodium
 firefox
 libreoffice-still
 discord

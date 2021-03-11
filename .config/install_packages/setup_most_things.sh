@@ -4,9 +4,15 @@ sudo pacman -Syu
 # install packages from pkg-list.txt
 sudo pacman -S --needed - < pkg-list.txt
 
-# build aur packages
+## build aur packages
+# install neovim and add config
+pamac build neovim-git
+pip install pynvim
+npm i -g neovim
+pip install neovim-remote
+# use :UpdateRemotePlugins in vscode
+
 pamac build aws-cdk
-pamac build anydesk-bin
 pamac build teams
 pamac build i3-gaps-rounded-git
 pamac build python-pywalfox

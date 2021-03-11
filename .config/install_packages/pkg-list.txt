@@ -7,9 +7,13 @@ pulseaudio
 docker
 flameshot
 galculator
+xournalpp
+zathura
+zathura-pdf-mupdf
 
 kitty
 neovim
+xsel
 fish
 exa
 

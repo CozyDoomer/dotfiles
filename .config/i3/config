@@ -13,21 +13,22 @@ border_radius 2
 
 hide_edge_borders none
 
-bindsym $mod+u border none
-bindsym $mod+n border pixel 2
+bindsym $mod+o border none
+bindsym $mod+p border pixel 2
 
 font xft:URWGothic-Book 11
 
 floating_modifier $mod
 
-bindsym $mod+Return exec kitty
+bindsym $mod+r exec kitty
+bindsym $mod+e exec kitty -e ranger
 
 # Window kill command
-bindsym $mod+r kill
+bindsym $mod+q kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -config ~/.config/rofi/config.rasi
-bindsym $mod+Ctrl+d exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort > /dev/null -config ~/.config/rofi/config.rasi
+bindsym $mod+c exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort > /dev/null -config ~/.config/rofi/config.rasi
 
 # change focus
 bindsym $mod+h focus left
@@ -54,23 +55,23 @@ bindsym $mod+Shift+Right move right
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
 bindsym $mod+space workspace back_and_forth
-bindsym $mod+Shift+space move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Return move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+c split h;exec notify-send 'tile horizontally'
+bindsym $mod+g split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+bindsym $mod+x split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+y layout tabbed
+bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+b floating toggle
+bindsym $mod+ floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -82,7 +83,7 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+a focus parent
 
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+plus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
@@ -151,16 +152,16 @@ for_window [class="Xfburn"] floating enable
 for_window [urgent=latest] focus
 
 # reload the configuration file
-bindsym $mod+c reload
+bindsym $mod+m reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+t restart
+bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
-bindsym $mod+Shift+r mode "$mode_system"
+bindsym $mod+Shift+t mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
@@ -266,14 +267,15 @@ bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0
 bindsym XF86TouchpadOff exec --no-startup-id synclient Touchpadoff=1
 
-bindsym $mod+Ctrl+Shift+h move workspace to output left
+# TODO better keybinds here
+bindsym $mod+u move workspace to output left
 bindsym $mod+Ctrl+Shift+Left move workspace to output left
-bindsym $mod+Ctrl+Shift+l move workspace to output right
+bindsym $mod+i move workspace to output right
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
-bindsym $mod+Ctrl+Shift+j exec bash ~/.config/i3/i3_display_swap.sh
+bindsym $mod+n exec bash ~/.config/i3/i3_display_swap.sh
 bindsym $mod+Ctrl+Shift+Down exec bash ~/.config/i3/i3_display_swap.sh
 
-bindsym $mod+Shift+Return exec kitty -e ranger
+exec_always --no-startup-id xmodmap ~/.Xmodmap
 
 # Set colors from Xresources
 set_from_resource $fg i3wm.color3 #f0f0f0

@@ -35,7 +35,6 @@
   "terminal.external.osxExec": "iTerm.app",
   "editor.minimap.enabled": false,
   "gitlens.codeLens.enabled": false,
-  "window.zoomLevel": 1,
   "window.menuBarVisibility": "toggle",
   "python.formatting.provider": "black",
   "python.insidersChannel": "off",
@@ -53,8 +52,8 @@
   "editor.snippetSuggestions": "bottom",
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/.config/nvim/init.vim",
-  "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/init.vim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/.config/nvim/vimscript/nv-vscode/init.vim",
+  "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/vimscript/nv-vscode/init.vim",
   "whichkey.sortOrder": "alphabetically",
   "whichkey.delay": 0,
   "tabnine.experimentalAutoImports": true,
@@ -1020,5 +1019,5 @@
       "command": "workbench.action.toggleZenMode"
     }
   ],
-  "workbench.activityBar.visible": false,
+  "window.zoomLevel": 0.4772413011367773,
 }

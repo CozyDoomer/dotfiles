@@ -21,7 +21,8 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 bindsym $mod+r exec kitty
-bindsym $mod+e exec kitty -e ranger
+bindsym $mod+e exec kitty ranger
+bindsym $mod+w exec kitty -d=$HOME/Documents/projects nvim 
 
 # Window kill command
 bindsym $mod+q kill
@@ -71,7 +72,7 @@ bindsym $mod+y layout tabbed
 bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+ floating toggle
+bindsym $mod+shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -158,7 +159,7 @@ bindsym $mod+m reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
 bindsym $mod+Shift+t mode "$mode_system"

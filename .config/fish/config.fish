@@ -1,6 +1,6 @@
 set -U fish_greeting ""
 
-export VISUAL="code"
+export VISUAL="vscodium"
 export EDITOR="nvim"
 export BROWSER="firefox"
 
@@ -63,6 +63,8 @@ if not set -q set_abbr
     abbr e      "exit"
     abbr l      "ls -l"
     abbr T      "tree"
+    abbr r      "ranger"
+	abbr n		"nvim"
 end
 
 # Start X at login
@@ -71,3 +73,8 @@ if status --is-login
         exec startx -- -keeptty
     end
 end
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /home/christian/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<

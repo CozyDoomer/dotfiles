@@ -5,6 +5,7 @@ discord
 steam
 pulseaudio
 docker
+lazygit
 flameshot
 galculator
 xournalpp

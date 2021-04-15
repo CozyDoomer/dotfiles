@@ -61,7 +61,7 @@ bindsym $mod+Return move container to workspace back_and_forth; workspace back_a
 # split orientation
 bindsym $mod+g split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+x split toggle
+bindsym $mod+g split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -296,6 +296,13 @@ exec --no-startup-id redshift-gtk
 exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
 
 # rice
+#
+# set bg, polybar, and i3 colors from randomly selected wallpaper in path 
+bindsym $mod+x exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/'
+# set bg, polybar, and i3 colors from default wallpaper
+bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
+
+# default startup and on i3 reload
 exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 exec_always --no-startup-id killall picom; sleep 0.1; picom;
 exec_always --no-startup-id sleep 0.4; pywalfox update

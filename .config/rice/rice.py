@@ -1,10 +1,9 @@
 import os
 import re
 import json
+import random
 import argparse
 import subprocess
-
-from wallpaper import wp_path
 
 
 def set_colors_env_var(colors_config):
@@ -31,7 +30,7 @@ def restart_polybar(main_monitor_name):
     # query monitor names by using subprocess to call xrandr
     monitor_names = []
     proc = subprocess.Popen(['xrandr', '--query'], stdout=subprocess.PIPE)
-    out, err = proc.communicate()
+    out, _ = proc.communicate()
 
     xrandr_str = out.decode('ascii')
     for line in xrandr_str.split('\n'):
@@ -53,15 +52,20 @@ def restart_polybar(main_monitor_name):
 
 def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
     home = os.path.expanduser('~')
-
-    # find wallpaper path in case partial filename / no extension is given
     wallpaper_path = wallpaper_path.replace('~', home)
-    partial_wallpaper_name = os.path.basename(wallpaper_path)
-    wallpaper_dir = os.path.dirname(wallpaper_path)
-    for wallpaper_name in os.listdir(wallpaper_dir):
-        if partial_wallpaper_name in wallpaper_name:
-            wallpaper_path = f'{wallpaper_dir}/{wallpaper_name}'
-            break
+
+    if os.path.isdir(wallpaper_path):
+        wallpaper_paths = os.listdir(wallpaper_path)
+        wallpaper = random.choice(wallpaper_paths)
+        wallpaper_path = f'{wallpaper_path}/{wallpaper}'
+    else:
+        # find wallpaper path in case partial filename / no extension is given
+        partial_wallpaper_name = os.path.basename(wallpaper_path)
+        wallpaper_dir = os.path.dirname(wallpaper_path)
+        for wallpaper_name in os.listdir(wallpaper_dir):
+            if partial_wallpaper_name in wallpaper_name:
+                wallpaper_path = f'{wallpaper_dir}/{wallpaper_name}'
+                break
 
     # launch pywal to set colors and have access to them in cache
     os.system(f'wal -i {wallpaper_path} -n')
@@ -83,7 +87,6 @@ def parse_cli_arguments():
         'wallpaper_path',
         nargs='?',
         type=str,
-        default=wp_path,
         help='path to a wallpaper image'
     )
     args = parser.parse_args()

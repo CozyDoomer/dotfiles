@@ -7,7 +7,7 @@ sudo pacman -S --needed - < pkg-list.txt
 ## build aur packages
 # install neovim and add config
 pamac build neovim-nightly-git
-bash <(curl -s https://raw.githubusercontent.com/CozyDoomer/nvcode/master/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/CozyDoomer/lunarvim/master/utils/installer/install.sh)
 # use :PackerInstall in nvim
 
 pamac build aws-cdk

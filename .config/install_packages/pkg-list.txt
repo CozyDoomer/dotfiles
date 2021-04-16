@@ -11,7 +11,6 @@ zathura
 zathura-pdf-mupdf
 
 kitty
-neovim
 xsel
 fish
 exa

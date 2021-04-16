@@ -8,10 +8,13 @@ sudo pacman -S --needed - < pkg-list.txt
 # install neovim and add config
 pamac build neovim-nightly-git
 bash <(curl -s https://raw.githubusercontent.com/CozyDoomer/lunarvim/master/utils/installer/install.sh)
-# use :PackerInstall in nvim
+pamac build vscodium-bin
 
-pamac build aws-cdk
-pamac build teams
+# work stuff
+# pamac build aws-cdk
+# pamac build teams
+
+# rice
 pamac build i3-gaps-rounded-git
 pamac build python-pywalfox
 pywalfox setup

@@ -10,23 +10,27 @@ pamac build neovim-nightly-git
 bash <(curl -s https://raw.githubusercontent.com/CozyDoomer/lunarvim/master/utils/installer/install.sh)
 pamac build vscodium-bin
 
+# setup anaconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+export PATH="$HOME/miniconda/bin:$PATH"
+conda init fish
+
 # work stuff
 # pamac build aws-cdk
 # pamac build teams
+# TODO: setup vnc here
 
 # rice
 pamac build i3-gaps-rounded-git
 pamac build python-pywalfox
-pywalfox setup
+pywalfox update
 
 # start docker service, add it to autostart create docker group and add user
 systemctl start docker.service
 systemctl enable docker.service
 sudo groupadd docker
 sudo usermod -aG docker $USER
-
-# add anydesk service to autostart
-systemctl enable anydesk
 
 # remove palemoon browser
 sudo pacman -Qsq '^palemoon' | sudo pacman -R -

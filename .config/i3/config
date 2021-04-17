@@ -205,8 +205,6 @@ mode "resize" {
 exec --no-startup-id xrandr --output DP-4 --right-of HDMI-0 --mode 2560x1440
 
 # Autostart applications
-exec --no-startup-id export EDITOR="/usr/bin/code"
-exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 # exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
@@ -267,7 +265,6 @@ bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0
 bindsym XF86TouchpadOff exec --no-startup-id synclient Touchpadoff=1
 
-# TODO better keybinds here
 bindsym $mod+u move workspace to output left
 bindsym $mod+Ctrl+Shift+Left move workspace to output left
 bindsym $mod+i move workspace to output right

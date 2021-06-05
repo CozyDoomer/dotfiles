@@ -6,8 +6,6 @@ for_window [class="^.*"] border pixel 2
 gaps inner 15
 gaps outer 5
 
-# smart_gaps on
-
 # Rounded corners
 border_radius 2
 
@@ -66,6 +64,8 @@ bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+a layout default
+bindsym $mod+a layout default
 bindsym $mod+s layout stacking
 bindsym $mod+y layout tabbed
 bindsym $mod+t layout toggle split
@@ -157,11 +157,8 @@ bindsym $mod+m reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
 # Set shut down, restart and locking features
-bindsym $mod+Shift+t mode "$mode_system"
+bindsym $mod+Shift+q mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
@@ -202,7 +199,8 @@ mode "resize" {
 }
 
 # switch monitors
-exec --no-startup-id xrandr --output DP-4 --right-of HDMI-0 --mode 2560x1440
+# exec --no-startup-id xrandr --output DP-4 --mode 2560x1440 right-of HDMI-0 --mode 2560x1440
+exec nvidia-settings --load-config-only
 
 # Autostart applications
 exec --no-startup-id nm-applet
@@ -294,12 +292,16 @@ exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
 # rice
 #
 # set bg, polybar, and i3 colors from randomly selected wallpaper in path 
-bindsym $mod+x exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/'
+bindsym $mod+x exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/'
+# bindsym $mod+x exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/'
+
 # set bg, polybar, and i3 colors from default wallpaper
-bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
+bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/kurzgesagt.png'
+# bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 
 # default startup and on i3 reload
-exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
+exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/kurzgesagt.png'
+# exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 exec_always --no-startup-id killall picom; sleep 0.1; picom;
 exec_always --no-startup-id sleep 0.4; pywalfox update
 exec_always --no-startup-id wal_steam -w

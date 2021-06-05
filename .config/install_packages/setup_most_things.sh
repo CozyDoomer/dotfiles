@@ -9,6 +9,7 @@ sudo pacman -S --needed - < pkg-list.txt
 pamac build neovim-nightly-git
 bash <(curl -s https://raw.githubusercontent.com/CozyDoomer/lunarvim/master/utils/installer/install.sh)
 pamac build vscodium-bin
+pamac build bitwarden-cli
 
 # setup anaconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh

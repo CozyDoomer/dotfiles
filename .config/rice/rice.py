@@ -15,12 +15,15 @@ def set_colors_env_var(colors_config):
     color6 = list(colors_dict.values())[6]
     color8 = list(colors_dict.values())[8]
 
-    os.environ['RAM_LABEL'] = '%{u' + color4 + '}%{+u}%{F' + color4 + '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
-    os.environ['CPU_LABEL'] = '%{u' + color6 + '}%{+u}%{F' + color6 + '}CPU%{F-}  %percentage:3% %%{u-}'
-    os.environ['TEMP_LABEL'] = '%{u' + color8 + '}%{+u}%{F' + color8 + '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
+    os.environ[
+        'RAM_LABEL'] = '%{u' + color4 + '}%{+u}%{F' + color4 + '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
+    os.environ[
+        'CPU_LABEL'] = '%{u' + color6 + '}%{+u}%{F' + color6 + '}CPU%{F-}  %percentage:3% %%{u-}'
+    os.environ[
+        'TEMP_LABEL'] = '%{u' + color8 + '}%{+u}%{F' + color8 + '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
     os.environ['TEMP_LABEL_WARN'] = (
-        '%{u' + color8 + '}%{+u}%{F' + color8 + '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}'
-    )
+        '%{u' + color8 + '}%{+u}%{F' + color8 +
+        '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}')
 
 
 def restart_polybar(main_monitor_name):
@@ -42,12 +45,14 @@ def restart_polybar(main_monitor_name):
         print(monitor_name)
         if monitor_name == main_monitor_name:
             subprocess.Popen(
-                f'MONITOR={monitor_name} polybar --reload main_bar', stdout=subprocess.PIPE, shell=True
-            )
+                f'MONITOR={monitor_name} polybar --reload main_bar',
+                stdout=subprocess.PIPE,
+                shell=True)
         else:
             subprocess.Popen(
-                f'MONITOR={monitor_name} polybar --reload secondary_bar', stdout=subprocess.PIPE, shell=True
-            )
+                f'MONITOR={monitor_name} polybar --reload secondary_bar',
+                stdout=subprocess.PIPE,
+                shell=True)
 
 
 def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
@@ -68,7 +73,7 @@ def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
                 break
 
     # launch pywal to set colors and have access to them in cache
-    os.system(f'wal -i {wallpaper_path} -n')
+    os.system(f'wal --saturate 0.8 -i {wallpaper_path} -n')
 
     # set colors in env
     colors_config = json.load(open(f'{home}/.cache/wal/colors.json'))
@@ -83,12 +88,10 @@ def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
 
 def parse_cli_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        'wallpaper_path',
-        nargs='?',
-        type=str,
-        help='path to a wallpaper image'
-    )
+    parser.add_argument('wallpaper_path',
+                        nargs='?',
+                        type=str,
+                        help='path to a wallpaper image')
     args = parser.parse_args()
     return args
 

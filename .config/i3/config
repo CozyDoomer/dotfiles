@@ -83,7 +83,7 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+shift+p focus parent
 
 # move the currently focused window to the scratchpad
-bindsym $mod+plus move scratchpad
+bindsym $mod+apostrophe move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
@@ -273,9 +273,9 @@ bindsym $mod+Ctrl+Shift+Down exec bash ~/.config/i3/i3_display_swap.sh
 exec_always --no-startup-id xmodmap ~/.Xmodmap
 
 # Set colors from Xresources
-set_from_resource $fg i3wm.color3 #f0f0f0
-set_from_resource $bg i3wm.color6 #f0f0f0
-set_from_resource $bd i3wm.color2 #f0f0f0
+set_from_resource $fg i3wm.color6
+set_from_resource $bg i3wm.color3
+set_from_resource $bd i3wm.color6
 
 # class                 border  backgr. text indicator child_border
 client.focused          $bg     $bg     $fg  $bg       $bd
@@ -302,6 +302,7 @@ bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallp
 # default startup and on i3 reload
 exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/kurzgesagt.png'
 # exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
+
 exec_always --no-startup-id killall picom; sleep 0.1; picom;
 exec_always --no-startup-id sleep 0.4; pywalfox update
 exec_always --no-startup-id wal_steam -w

@@ -93,17 +93,17 @@ label-mode-background = #282a2e
 
 label-focused = %index%
 label-focused-background = #373b41
-label-focused-foreground = ${xrdb:i3wm.color2:#f0f0f0}
+label-focused-foreground = ${xrdb:i3wm.color6:#f0f0f0}
 label-focused-padding = 2
 
 label-unfocused = %index%
 label-unfocused-background = #282a2e
-label-unfocused-foreground = ${xrdb:i3wm.color6:#f0f0f0}
+label-unfocused-foreground = ${xrdb:i3wm.color2:#f0f0f0}
 label-unfocused-padding = 2
 
 label-visible = %index%
 label-visible-background = #282a2e
-label-visible-foreground = ${xrdb:i3wm.color2:#f0f0f0}
+label-visible-foreground = ${xrdb:i3wm.color3:#f0f0f0}
 label-visible-padding = 2
 
 label-urgent = %index%

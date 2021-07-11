@@ -18,9 +18,10 @@ font xft:URWGothic-Book 11
 
 floating_modifier $mod
 
-bindsym $mod+r exec kitty
-bindsym $mod+e exec kitty ranger
 bindsym $mod+w exec kitty -d=$HOME/Documents/projects nvim 
+bindsym $mod+e exec kitty ranger
+bindsym $mod+r exec kitty
+bindsym $mod+t exec kitty htop
 
 # Window kill command
 bindsym $mod+q kill
@@ -57,8 +58,8 @@ bindsym $mod+Return workspace back_and_forth
 bindsym $mod+Shift+Return move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+g split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+b split h;exec notify-send 'tile horizontally'
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -68,7 +69,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+a layout default
 bindsym $mod+s layout stacking
 bindsym $mod+y layout tabbed
-bindsym $mod+t layout toggle split
+bindsym $mod+g layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+shift+space floating toggle
@@ -303,6 +304,7 @@ bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallp
 exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/kurzgesagt.png'
 # exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 
-exec_always --no-startup-id killall picom; sleep 0.1; picom;
+# disable picom by default as it causes lag when playing videos
+# exec_always --no-startup-id killall picom; sleep 0.1; picom;
 exec_always --no-startup-id sleep 0.4; pywalfox update
 exec_always --no-startup-id wal_steam -w

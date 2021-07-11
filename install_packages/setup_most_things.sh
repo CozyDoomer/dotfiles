@@ -8,6 +8,7 @@ sudo pacman -S --needed - < pkg-list.txt
 # install neovim and add config
 pamac build neovim-nightly-git
 bash <(curl -s https://raw.githubusercontent.com/CozyDoomer/lunarvim/master/utils/installer/install.sh)
+pamac build htop-vim-git
 pamac build vscodium-bin
 pamac build bitwarden-cli
 

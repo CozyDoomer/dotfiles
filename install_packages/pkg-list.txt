@@ -26,6 +26,7 @@ python-i3ipc
 sassc
 nerd-fonts-terminus
 
+go
 cuda
 cudnn
 

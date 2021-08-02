@@ -2,7 +2,7 @@
 	email = chr.unterrainer@gmail.com
 	name = cozyDoomer
 [core]
-	editor = nvim 
+	editor = lvim 
 [lpull]
 	rebase = true
 [pull]

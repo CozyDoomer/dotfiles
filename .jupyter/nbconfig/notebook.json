@@ -1,0 +1,18 @@
+{
+  "load_extensions": {
+    "nbextensions_configurator/config_menu/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "collapsible_headings/main": true,
+    "scratchpad/main": true,
+    "gist_it/main": true,
+    "keyboard_shortcut_editor/main": true,
+    "table_beautifier/main": true,
+    "snippets_menu/main": true,
+    "toc2/main": true,
+    "vim_binding/vim_binding": true
+  },
+  "toc2": {
+    "number_sections": true,
+    "toc_cell": true
+  }
+}

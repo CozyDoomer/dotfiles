@@ -48,12 +48,13 @@ end
 
 -- Additional Plugins
 lvim.plugins = {
-    {"lunarvim/colorschemes"},
     {"folke/tokyonight.nvim"}, {
         "ray-x/lsp_signature.nvim",
         config = function() require"lsp_signature".on_attach() end,
         event = "InsertEnter"
-    }
+    },
+    {"kkoomen/vim-doge"}
+    -- :call doge#install()
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)

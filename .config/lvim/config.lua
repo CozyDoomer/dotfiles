@@ -48,14 +48,16 @@ end
 
 -- Additional Plugins
 lvim.plugins = {
-    {"folke/tokyonight.nvim"}, {
+    {"folke/tokyonight.nvim"},
+    {
         "ray-x/lsp_signature.nvim",
         config = function() require"lsp_signature".on_attach() end,
         event = "InsertEnter"
     },
-    {"kkoomen/vim-doge"}
+    {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' }
     -- :call doge#install()
 }
+vim.g["doge_doc_standard_python"] = "numpy"
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
@@ -64,4 +66,3 @@ lvim.plugins = {
 
 -- Additional Leader bindings for WhichKey
 lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
-

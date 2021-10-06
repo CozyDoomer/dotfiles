@@ -39,19 +39,19 @@ sudo pacman -Qsq '^palemoon' | sudo pacman -R -
 sudo pacman -Syu
 
 conda create -n "jupyter" python=3.8
-pip install jupyter
-pip install jupyter_contrib_nbextensions
+pip install jupyter jupyter_contrib_nbextensions
 jupyter nbextension enable toc2/main
 jupyter nbextension enable collapsible_headings/main
 jupyter nbextension enable cscratchpad/main
 jupyter nbextension enable snippets_menu/main
 jupyter nbextension enable gist_it/main
 jupyter nbextension enable keyboard_shortcut_menu/main
-jupyter nbextension enable table_beautifier/main
 
 mkdir -p $(jupyter --data-dir)/nbextensions
 git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
 jupyter nbextension enable vim_binding/vim_binding
+
+jupyter contrib nbextension install --user
 
 pip install jupyterthemes
 jt -t chesterish -vim

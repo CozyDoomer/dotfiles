@@ -6,9 +6,11 @@ sudo pacman -S --needed - < pkg-list.txt
 
 ## build aur packages
 
+pamac build noise-suppression-for-voice
 pamac build htop-vim-git
 pamac build vscodium-bin
 pamac build bitwarden-cli
+pamac build youtube-music-bin
 
 # setup anaconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh

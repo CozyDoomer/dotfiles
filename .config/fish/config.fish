@@ -4,6 +4,9 @@ export VISUAL="vscodium"
 export EDITOR="lvim"
 export BROWSER="firefox"
 
+export timestamp_timeout=60
+export timestamp_type=global
+
 source ~/.cache/wal/colors.fish
 
 # Use rg instead of ag / ack / grep for fzf (much faster)
@@ -25,10 +28,12 @@ set -x -U LESS_TERMCAP_us (printf "\e[01;32m")
 fish_default_key_bindings
 
 alias nvim="lvim"
+alias ssh="kitty +kitten ssh"
 
 # Use exa as a drop-in replacement for ls and tree (faster, more colors, etc.)
 alias ls="exa --group-directories-first"
 alias tree="exa --group-directories-first --long --tree -I 'node_modules|lib|.git'"
+alias discord='discord --no-sandbox'
 
 # Abbreviations are aliases that expand
 if not set -q set_abbr

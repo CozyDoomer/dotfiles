@@ -1,0 +1,112 @@
+{
+	"window-size": {
+		"width": 2518,
+		"height": 671
+	},
+	"url": "https://music.youtube.com/watch?v=wjDCGIweiGg&list=RDAMVMwjDCGIweiGg",
+	"options": {
+		"tray": true,
+		"appVisible": true,
+		"autoUpdates": true,
+		"hideMenu": false,
+		"startAtLogin": false,
+		"disableHardwareAcceleration": false,
+		"restartOnConfigChanges": false,
+		"trayClickPlayPause": true,
+		"autoResetAppCache": false,
+		"resumeOnStart": true,
+		"proxy": ""
+	},
+	"plugins": {
+		"navigation": {
+			"enabled": true
+		},
+		"adblocker": {
+			"enabled": true,
+			"cache": true,
+			"additionalBlockLists": []
+		},
+		"shortcuts": {
+			"enabled": true,
+			"overrideMediaKeys": true,
+			"global": [
+				{
+					"shortcut": "CommandOrControl+Shift+M",
+					"action": "muteUnmute"
+				},
+				{
+					"shortcut": "VolumeUp",
+					"action": "volumePlus10"
+				},
+				{
+					"shortcut": "VolumeDown",
+					"action": "volumeMinus10"
+				}
+			]
+		},
+		"downloader": {
+			"enabled": true,
+			"ffmpegArgs": []
+		},
+		"last-fm": {
+			"enabled": false,
+			"api_root": "http://ws.audioscrobbler.com/2.0/",
+			"api_key": "04d76faaac8726e60988e14c105d421a",
+			"secret": "a5d2a36fdf64819290f6982481eaffa2"
+		},
+		"discord": {
+			"enabled": true,
+			"activityTimoutEnabled": true,
+			"activityTimoutTime": 600000
+		},
+		"notifications": {
+			"enabled": false,
+			"unpauseNotification": false,
+			"urgency": "normal",
+			"interactive": false
+		},
+		"precise-volume": {
+			"enabled": false,
+			"steps": 1,
+			"arrowsShortcut": false,
+			"globalShortcuts": {
+				"enabled": false
+			},
+			"savedVolume": 30
+		},
+		"sponsorblock": {
+			"enabled": true,
+			"apiURL": "https://sponsor.ajay.app",
+			"categories": [
+				"sponsor",
+				"intro",
+				"outro",
+				"interaction",
+				"selfpromo",
+				"music_offtopic"
+			]
+		},
+		"lyrics-genius": {
+			"enabled": true
+		},
+		"playback-speed": {
+			"enabled": true
+		},
+		"in-app-menu": {
+			"enabled": true
+		},
+		"auto-confirm-when-paused": {
+			"enabled": true
+		}
+	},
+	"__internal__": {
+		"migrations": {
+			"version": "1.13.0"
+		}
+	},
+	"window-position": {
+		"x": 2581,
+		"y": 748
+	},
+	"window-maximized": false
+}

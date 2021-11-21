@@ -15,6 +15,11 @@ xsel
 fish
 exa
 
+codespell
+shellcheck
+python-black
+python-isort
+
 polybar
 rofi
 rofi-calc

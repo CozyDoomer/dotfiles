@@ -17,6 +17,7 @@ exa
 
 codespell
 shellcheck
+diff-so-fancy
 python-black
 python-isort
 

@@ -74,6 +74,10 @@ if not set -q set_abbr
     abbr n nvim
 end
 
+function bwl
+  export BW_SESSION=(bw unlock --raw)
+end
+
 function bwp
   bw get password $argv | xclip -sel clip
 end

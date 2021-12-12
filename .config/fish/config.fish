@@ -74,9 +74,12 @@ if not set -q set_abbr
     abbr n nvim
 end
 
-# bitwarden cli get password
-function bwg
+function bwp
   bw get password $argv | xclip -sel clip
+end
+
+function bwu
+  bw get username $argv | xclip -sel clip
 end
 
 # Start X at login

@@ -27,8 +27,11 @@ bindsym $mod+t exec kitty htop
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -config ~/.config/rofi/config.rasi
-bindsym $mod+c exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort > /dev/null -config ~/.config/rofi/config.rasi
+bindsym $mod+a exec --no-startup-id bash ~/.config/rofi/bin/powermenu
+bindsym $mod+s exec --no-startup-id bash ~/.config/rofi/bin/menu_quicklinks
+bindsym $mod+d exec --no-startup-id bash ~/.config/rofi/bin/launcher_colorful
+bindsym $mod+g exec --no-startup-id bash ~/.config/rofi/bin/menu_time
+bindsym $mod+c exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort > /dev/null
 
 # change focus
 bindsym $mod+h focus left
@@ -66,10 +69,12 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+a layout default
-bindsym $mod+a layout default
-bindsym $mod+s layout stacking
-bindsym $mod+y layout tabbed
-bindsym $mod+g layout toggle split
+# TODO: shortcuts for these:
+bindsym $mod+n layout default
+bindsym $mod+m layout toggle split
+bindsym $mod+comma layout stacking
+bindsym $mod+period layout tabbed
+
 
 # toggle tiling / floating
 bindsym $mod+shift+space floating toggle
@@ -153,7 +158,7 @@ for_window [class="Xfburn"] floating enable
 for_window [urgent=latest] focus
 
 # reload the configuration file
-bindsym $mod+m reload
+bindsym $mod+n reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -198,10 +203,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-# switch monitors
-# exec --no-startup-id xrandr --output DP-4 --mode 2560x1440 right-of HDMI-0 --mode 2560x1440
-exec nvidia-settings --load-config-only
 
 # Autostart applications
 exec --no-startup-id nm-applet
@@ -268,8 +269,6 @@ bindsym $mod+u move workspace to output left
 bindsym $mod+Ctrl+Shift+Left move workspace to output left
 bindsym $mod+i move workspace to output right
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
-bindsym $mod+n exec bash ~/.config/i3/i3_display_swap.sh
-bindsym $mod+Ctrl+Shift+Down exec bash ~/.config/i3/i3_display_swap.sh
 
 exec_always --no-startup-id xmodmap ~/.Xmodmap
 
@@ -293,16 +292,16 @@ exec_always --no-startup-id ~/.config/i3/alternating_layouts.py
 # rice
 #
 # set bg, polybar, and i3 colors from randomly selected wallpaper in path 
-bindsym $mod+x exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/'
-# bindsym $mod+x exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/'
+bindsym $mod+x exec python ~/.config/rice/rice.py '~/.config/wallpapers/3-monitors/'
+# bindsym $mod+x exec python ~/.config/rice/rice.py '~/.config/wallpapers/2-monitors/'
 
 # set bg, polybar, and i3 colors from default wallpaper
-bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/kurzgesagt.png'
-# bindsym $mod+z exec python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
+bindsym $mod+z exec python ~/.config/rice/rice.py '~/.config/wallpapers/3-monitors/kurzgesagt.png'
+# bindsym $mod+z exec python ~/.config/rice/rice.py '~/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 
 # default startup and on i3 reload
-exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/3-monitors/kurzgesagt.png'
-# exec_always --no-startup-id python ~/.config/rice/rice.py '/home/christian/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
+exec_always --no-startup-id python ~/.config/rice/rice.py '~/.config/wallpapers/3-monitors/kurzgesagt.png'
+# exec_always --no-startup-id python ~/.config/rice/rice.py '~/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 
 # disable picom by default as it causes lag when playing videos
 # exec_always --no-startup-id killall picom; sleep 0.1; picom;

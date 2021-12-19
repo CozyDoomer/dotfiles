@@ -1,9 +1,9 @@
 {
 	"window-size": {
-		"width": 2518,
-		"height": 671
+		"width": 1250,
+		"height": 1360
 	},
-	"url": "https://music.youtube.com/watch?v=wjDCGIweiGg&list=RDAMVMwjDCGIweiGg",
+	"url": "https://music.youtube.com/watch?v=v6VmbmlUyww&list=RDAMVMwjDCGIweiGg&index=0",
 	"options": {
 		"tray": true,
 		"appVisible": true,
@@ -29,20 +29,13 @@
 		"shortcuts": {
 			"enabled": true,
 			"overrideMediaKeys": true,
-			"global": [
-				{
-					"shortcut": "CommandOrControl+Shift+M",
-					"action": "muteUnmute"
-				},
-				{
-					"shortcut": "VolumeUp",
-					"action": "volumePlus10"
-				},
-				{
-					"shortcut": "VolumeDown",
-					"action": "volumeMinus10"
-				}
-			]
+			"global": {
+				"previous": "CommandOrControl+Shift+h",
+				"playPause": "CommandOrControl+Shift+j",
+				"next": "CommandOrControl+Shift+l",
+				"volumeMinus10": "CommandOrControl+Shift+,",
+				"volumePlus10": "CommandOrControl+Shift+."
+			}
 		},
 		"downloader": {
 			"enabled": true,
@@ -101,12 +94,12 @@
 	},
 	"__internal__": {
 		"migrations": {
-			"version": "1.13.0"
+			"version": "1.14.0"
 		}
 	},
 	"window-position": {
-		"x": 2581,
-		"y": 748
+		"x": 1289,
+		"y": 59
 	},
 	"window-maximized": false
 }

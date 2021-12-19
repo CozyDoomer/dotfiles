@@ -11,19 +11,30 @@ sudo pacman -Syu
 sudo pacman -S --needed - < pkg-list.txt
 
 ## build aur packages
+
+# keyboard
+pamac build zsa-wally-bin
+
+# mic noise suppression
 pamac build noise-suppression-for-voice
+
+# secondary editor
 pamac build vscodium-bin
 
+# password manager
 pamac build bitwarden-cli
 bw login
 
+# music player
 pamac build youtube-music-bin
 
-# setup anaconda
+# setup anaconda for python package management
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
 bash ~/miniconda.sh -b -p $HOME/miniconda
 export PATH="$HOME/miniconda/bin:$PATH"
 conda init fish
+
+sudo npm i -g eslint_d
 
 # work stuff
 pamac build teams
@@ -44,6 +55,7 @@ sudo usermod -aG docker $USER
 # remove palemoon browser
 sudo pacman -Qsq '^palemoon' | sudo pacman -R -
 
+# create jupyter environment and install extensions and theme
 conda create -n "jupyter" python=3.8
 pip install jupyter jupyter_contrib_nbextensions
 jupyter nbextension enable toc2/main
@@ -56,6 +68,7 @@ jupyter nbextension enable keyboard_shortcut_menu/main
 mkdir -p "$(jupyter --data-dir)"/nbextensions
 git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
 jupyter nbextension enable vim_binding/vim_binding
+rm -rf vim_binding
 
 jupyter contrib nbextension install --user
 

@@ -80,10 +80,10 @@ case $chosen in
         fi
         ;;
     $lock)
-		if [[ -f /usr/bin/i3lock ]]; then
+		if [[ -f /usr/bin/i3exit ]]; then
+			i3exit lock
+		elif [[ -f /usr/bin/i3lock ]]; then
 			i3lock
-		elif [[ -f /usr/bin/betterlockscreen ]]; then
-			betterlockscreen -l
 		fi
         ;;
     $suspend)

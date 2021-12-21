@@ -21,9 +21,9 @@ FG="#FFFFFFff"
 SELECT="#101010ff"
 
 # light
-#ALPHA="#00000000"
-#BG="#FFFFFFff"
-#FG="#000000ff"
+# ALPHA="#00000000"
+# BG="#FFFFFFff"
+# FG="#000000ff"
 #SELECT="#f3f3f3ff"
 
 # accent colors

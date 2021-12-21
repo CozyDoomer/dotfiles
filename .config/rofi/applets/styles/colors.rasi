@@ -19,4 +19,5 @@
  *
  */
 
+/* @import "dark.rasi" */
 @import "~/.cache/wal/colors-rofi-dark.rasi"

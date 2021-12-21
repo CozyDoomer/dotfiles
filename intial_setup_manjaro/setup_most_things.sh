@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# TODO: this doesn't work!
 touch /etc/X11/xinit/xinitrc.d/95-nvidia-settings
 echo "#!/bin/sh" > /etc/X11/xinit/xinitrc.d/95-nvidia-settings
 echo "/usr/bin/nvidia-settings --load-config-only" >> /etc/X11/xinit/xinitrc.d/95-nvidia-settings
@@ -10,8 +11,19 @@ sudo pacman -Syu
 # install packages from pkg-list.txt
 sudo pacman -S --needed - < pkg-list.txt
 
-## build aur packages
+# setup printer
+pamac install manjaro-printer
+sudo gpasswd -a cozy sys
 
+pamac install system-config-printer
+# then call system-config-printer and
+# install printer drivers
+
+sudo systemctl enable --now cups.service
+sudo systemctl enable --now cups.socket
+sudo systemctl enable --now cups.path
+
+## build aur packages
 # keyboard
 pamac build zsa-wally-bin
 
@@ -35,6 +47,7 @@ export PATH="$HOME/miniconda/bin:$PATH"
 conda init fish
 
 sudo npm i -g eslint_d
+pamac build python-lsp-server
 
 # work stuff
 pamac build teams

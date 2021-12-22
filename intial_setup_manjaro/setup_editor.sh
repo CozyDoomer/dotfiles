@@ -15,3 +15,6 @@ then
 else
 	echo "not a valid lvim version, pass one of 'release' or 'rolling'"
 fi
+
+# setup julia LSP
+julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'

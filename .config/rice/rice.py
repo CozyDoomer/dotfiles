@@ -15,15 +15,22 @@ def set_colors_env_var(colors_config):
     color6 = list(colors_dict.values())[6]
     color8 = list(colors_dict.values())[8]
 
-    os.environ[
-        'RAM_LABEL'] = '%{u' + color4 + '}%{+u}%{F' + color4 + '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
-    os.environ[
-        'CPU_LABEL'] = '%{u' + color6 + '}%{+u}%{F' + color6 + '}CPU%{F-}  %percentage:3% %%{u-}'
-    os.environ[
-        'TEMP_LABEL'] = '%{u' + color8 + '}%{+u}%{F' + color8 + '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
+    os.environ['RAM_LABEL'] = (
+        '%{u' + color4 + '}%{+u}%{F' + color4 +
+        '}RAM%{F-}  %gb_used:4%/%gb_total:4%%{u-}'
+    )
+    os.environ['CPU_LABEL'] = (
+        '%{u' + color6 + '}%{+u}%{F' + color6 +
+        '}CPU%{F-}  %percentage:3% %%{u-}'
+    )
+    os.environ['TEMP_LABEL'] = (
+        '%{u' + color8 + '}%{+u}%{F' + color8 +
+        '}TEMP%{F-}  %temperature-c:3% °C%{u-}'
+    )
     os.environ['TEMP_LABEL_WARN'] = (
         '%{u' + color8 + '}%{+u}%{F' + color8 +
-        '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}')
+        '}TEMP%{F-}  %{F#f00}%temperature-c:3% °C%{F-}%{u-}'
+    )
 
 
 def restart_polybar(main_monitor_name):
@@ -42,23 +49,27 @@ def restart_polybar(main_monitor_name):
 
     # start polybar main_bar or secondary_bar depending on screen
     for monitor_name in monitor_names:
-        print(monitor_name)
         if monitor_name == main_monitor_name:
             subprocess.Popen(
                 f'MONITOR={monitor_name} polybar --reload main_bar',
                 stdout=subprocess.PIPE,
-                shell=True)
+                shell=True
+            )
         else:
             subprocess.Popen(
                 f'MONITOR={monitor_name} polybar --reload secondary_bar',
                 stdout=subprocess.PIPE,
-                shell=True)
+                shell=True
+            )
 
 
 def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
+    import time
+    start_time = time.time()
     home = os.path.expanduser('~')
     wallpaper_path = wallpaper_path.replace('~', home)
-
+    print("after home dir")
+    print(start_time - time.time())
     if os.path.isdir(wallpaper_path):
         wallpaper_paths = os.listdir(wallpaper_path)
         wallpaper = random.choice(wallpaper_paths)
@@ -72,26 +83,39 @@ def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
                 wallpaper_path = f'{wallpaper_dir}/{wallpaper_name}'
                 break
 
+    print("after getting WP")
+    print(start_time - time.time())
+
     # launch pywal to set colors and have access to them in cache
     os.system(f'wal --saturate 0.8 -i {wallpaper_path} -n')
+    print("after wal")
+    print(start_time - time.time())
 
     # set colors in env
     colors_config = json.load(open(f'{home}/.cache/wal/colors.json'))
     set_colors_env_var(colors_config)
+    print("after setting env vars")
+    print(start_time - time.time())
 
     # restart_polybar polybar
     restart_polybar(main_monitor_name)
+    print("after restarting polybar")
+    print(start_time - time.time())
 
     # Call 'feh' to set the wallpaper.
     os.system(f'/usr/bin/feh --bg-scale --no-xinerama {wallpaper_path}')
+    print("after feh")
+    print(start_time - time.time())
 
 
 def parse_cli_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('wallpaper_path',
-                        nargs='?',
-                        type=str,
-                        help='path to a wallpaper image')
+    parser.add_argument(
+        'wallpaper_path',
+        nargs='?',
+        type=str,
+        help='path to a wallpaper image'
+    )
     args = parser.parse_args()
     return args
 

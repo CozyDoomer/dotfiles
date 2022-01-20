@@ -71,7 +71,7 @@ if not set -q set_abbr
     abbr l "ls -l"
     abbr T tree
     abbr r ranger
-    abbr n nvim
+    abbr lv lvim
 end
 
 function bwl
@@ -95,5 +95,5 @@ end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /home/christian/miniconda/bin/conda "shell.fish" hook $argv | source
+eval /home/cozy/miniconda/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<

@@ -170,7 +170,8 @@ lvim.plugins = {
       cmd = "TroubleToggle",
     },
     {"aurieh/discord.nvim"},
-    {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' }
+    {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
+    {"tpope/vim-fugitive"},
     -- :call doge#install()
 }
 vim.g["doge_doc_standard_python"] = "numpy"

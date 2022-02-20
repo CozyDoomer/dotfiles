@@ -20,6 +20,7 @@ discord
 steam
 pulseaudio
 docker
+docker-compose
 flameshot
 galculator
 xournalpp

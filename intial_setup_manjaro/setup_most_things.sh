@@ -40,6 +40,8 @@ bw login
 # music player
 pamac build youtube-music-bin
 
+pamac build gnome-disk-utility
+
 # setup anaconda for python package management
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
 bash ~/miniconda.sh -b -p $HOME/miniconda

@@ -30,9 +30,9 @@
 			"enabled": true,
 			"overrideMediaKeys": true,
 			"global": {
-				"previous": "CommandOrControl+Shift+h",
-				"playPause": "CommandOrControl+Shift+j",
-				"next": "CommandOrControl+Shift+l",
+				"previous": "CommandOrControl+Shift+n",
+				"playPause": "CommandOrControl+Shift+/",
+				"next": "CommandOrControl+Shift+m",
 				"volumeMinus10": "CommandOrControl+Shift+,",
 				"volumePlus10": "CommandOrControl+Shift+."
 			}

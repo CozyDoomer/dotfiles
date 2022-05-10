@@ -40,7 +40,11 @@ bw login
 # music player
 pamac build youtube-music-bin
 
+# list partitions and easy automount
 pamac build gnome-disk-utility
+
+# visualize disk space usage
+pamac build baobab
 
 # setup anaconda for python package management
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh

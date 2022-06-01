@@ -55,7 +55,7 @@ lvim.builtin.telescope.defaults.mappings = {
 lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 
 lvim.builtin.project.active = false
@@ -169,23 +169,25 @@ end
 -- Additional Plugins
 lvim.plugins = {
     {"lunarvim/colorschemes"},
-    {"folke/tokyonight.nvim"}, {
+    {"folke/tokyonight.nvim"},
+    {
         "ray-x/lsp_signature.nvim",
         config = function() require"lsp_signature".on_attach() end,
-        event = "BufRead"
+        event = "InsertEnter"
     },
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
+    {"tpope/vim-fugitive"},
+    {"windwp/nvim-spectre"},
     {"aurieh/discord.nvim"},
     {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
-    {"tpope/vim-fugitive"},
     -- :call doge#install()
 }
 vim.g["doge_doc_standard_python"] = "numpy"
+vim.opt.colorcolumn="79"
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
-lvim.autocommands.custom_groups = {
-  { "BufWinEnter", "*.jl", "setlocal ts=4 sw=4" },
-}
+lvim.builtin.which_key.mappings["S"] = {"Search and Replace"}
+lvim.builtin.which_key.mappings["Sw"] = {":lua require('spectre').open_visual({select_word=true})<CR>", "Search and replace selection"}
+lvim.builtin.which_key.mappings["Sp"] = {":lua require('spectre').open_visual()<CR>", "Search and replace"}
+lvim.builtin.which_key.mappings["Sf"] = {"viw:lua require('spectre').open_file_search()<cr>", "Open file search"}
+lvim.builtin.which_key.mappings["D"] = {":DogeGenerate<CR>", "Python docstring"}
+lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }

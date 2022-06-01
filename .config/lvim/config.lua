@@ -176,7 +176,6 @@ lvim.plugins = {
         event = "InsertEnter"
     },
     {"tpope/vim-fugitive"},
-    {"windwp/nvim-spectre"},
     {"aurieh/discord.nvim"},
     {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
     -- :call doge#install()
@@ -184,10 +183,6 @@ lvim.plugins = {
 vim.g["doge_doc_standard_python"] = "numpy"
 vim.opt.colorcolumn="79"
 
-lvim.builtin.which_key.mappings["S"] = {"Search and Replace"}
-lvim.builtin.which_key.mappings["Sw"] = {":lua require('spectre').open_visual({select_word=true})<CR>", "Search and replace selection"}
-lvim.builtin.which_key.mappings["Sp"] = {":lua require('spectre').open_visual()<CR>", "Search and replace"}
-lvim.builtin.which_key.mappings["Sf"] = {"viw:lua require('spectre').open_file_search()<cr>", "Open file search"}
 lvim.builtin.which_key.mappings["D"] = {":DogeGenerate<CR>", "Python docstring"}
 lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }

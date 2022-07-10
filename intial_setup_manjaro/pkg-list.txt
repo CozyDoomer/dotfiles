@@ -38,10 +38,13 @@ codespell
 shellcheck
 ripgrep
 diff-so-fancy
+
+poetry
+pyenv
 flake8
-prettier
 python-black
 python-isort
+prettier
 eslint
 
 cuda

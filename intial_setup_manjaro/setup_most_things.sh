@@ -46,12 +46,6 @@ pamac build gnome-disk-utility
 # visualize disk space usage
 pamac build baobab
 
-# setup anaconda for python package management
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-bash ~/miniconda.sh -b -p $HOME/miniconda
-export PATH="$HOME/miniconda/bin:$PATH"
-conda init fish
-
 sudo npm i -g eslint_d
 pamac build python-lsp-server
 
@@ -74,8 +68,7 @@ sudo usermod -aG docker $USER
 # remove palemoon browser
 sudo pacman -Qsq '^palemoon' | sudo pacman -R -
 
-# create jupyter environment and install extensions and theme
-conda create -n "jupyter" python=3.8
+# install jupyter extensions and theme
 pip install jupyter jupyter_contrib_nbextensions
 jupyter nbextension enable toc2/main
 jupyter nbextension enable collapsible_headings/main

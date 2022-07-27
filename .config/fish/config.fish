@@ -34,6 +34,7 @@ alias ssh="kitty +kitten ssh"
 alias ls="exa --group-directories-first"
 alias tree="exa --group-directories-first --long --tree -I 'node_modules|lib|.git'"
 alias discord='discord --no-sandbox'
+alias teams='teams --no-sandbox'
 
 # Abbreviations are aliases that expand
 if not set -q set_abbr

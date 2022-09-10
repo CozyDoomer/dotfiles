@@ -40,18 +40,22 @@ lvim.builtin.telescope.defaults.mappings = {
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["r"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+}
 
--- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["S"] = {"Search and Replace"}
+lvim.builtin.which_key.mappings["Sr"] = {":lua require('spectre').open_visual()<CR>", "Search and replace"}
+lvim.builtin.which_key.mappings["Sw"] = {":lua require('spectre').open_visual({select_word=true})<CR>", "Search and replace selection"}
+lvim.builtin.which_key.mappings["Sf"] = {"viw:lua require('spectre').open_file_search()<cr>", "Open file search"}
+
+lvim.builtin.which_key.mappings["D"] = {":DogeGenerate<CR>", "Python docstring"}
 lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -175,14 +179,47 @@ lvim.plugins = {
         config = function() require"lsp_signature".on_attach() end,
         event = "InsertEnter"
     },
+    {
+      "kevinhwang91/nvim-bqf",
+      event = { "BufRead", "BufNew" },
+      config = function()
+      require("bqf").setup({
+              auto_enable = true,
+              preview = {
+              win_height = 12,
+              win_vheight = 12,
+              delay_syntax = 80,
+              border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+            },
+              func_map = {
+              vsplit = "",
+              ptogglemode = "z,",
+              stoggleup = "",
+            },
+              filter = {
+              fzf = {
+              action_for = { ["ctrl-s"] = "split" },
+              extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+            },
+        },
+      })
+      end,
+    },
+    {
+      "windwp/nvim-spectre",
+      event = "BufRead",
+      config = function()
+        require("spectre").setup()
+      end,
+    },
+    {
+    "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
     {"tpope/vim-fugitive"},
     {"aurieh/discord.nvim"},
     {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
     -- :call doge#install()
 }
 vim.g["doge_doc_standard_python"] = "numpy"
-vim.opt.colorcolumn="79"
-
-lvim.builtin.which_key.mappings["D"] = {":DogeGenerate<CR>", "Python docstring"}
-lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
-lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+vim.opt.colorcolumn = "79"

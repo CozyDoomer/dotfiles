@@ -39,7 +39,6 @@ lvim.builtin.telescope.defaults.mappings = {
 }
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["r"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -54,15 +53,14 @@ lvim.builtin.which_key.mappings["S"] = {"Search and Replace"}
 lvim.builtin.which_key.mappings["Sr"] = {":lua require('spectre').open_visual()<CR>", "Search and replace"}
 lvim.builtin.which_key.mappings["Sw"] = {":lua require('spectre').open_visual({select_word=true})<CR>", "Search and replace selection"}
 lvim.builtin.which_key.mappings["Sf"] = {"viw:lua require('spectre').open_file_search()<cr>", "Open file search"}
-
-lvim.builtin.which_key.mappings["D"] = {":DogeGenerate<CR>", "Python docstring"}
 lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
+lvim.builtin.which_key.mappings["D"] = {":DogeGenerate<CR>", "Python docstring"}
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 
-lvim.builtin.project.active = false
+lvim.builtin.project.active = true
 lvim.builtin.nvimtree.setup.view.side = "right"
 lvim.builtin.nvimtree.show_icons.git = 1
 

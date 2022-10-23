@@ -3,8 +3,8 @@
 configuration {
   show-icons: true;
   icon-theme: "Papirus";
-	kb-row-up: "super+k";
-	kb-row-down: "super+j";
+	kb-row-up: "super+j";
+	kb-row-down: "super+k";
 	kb-row-left: "super+h";
 	kb-row-right: "super+l";
 }

@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# set -x
+
+print_usage() {
+  echo "$0 [--map=0:3] video_file" >&2
+  echo "" >&2
+  echo "With video_file the path to a file like mkv which embeds the subtitles" >&2
+  echo "--map: use the specified embedded subtitle." >&2
+  echo "" >&2
+  echo "Examples:" >&2
+  echo "$0 --map=0:3 ./movie.mkv" >&2
+}
+
+map=""
+while getopts ":-:" optchar; do
+  [[ "${optchar}" == "-" ]] || continue
+  case "${OPTARG}" in
+    map=* )
+      map=${OPTARG#*=}
+      ;;
+    help )
+      print_usage
+      exit -1
+      ;;
+  esac
+done
+
+# Remove from the list of arguments the one already handled by getopts
+shift $(($OPTIND - 1))
+
+if [[ $# -ne 1 ]]; then
+  echo "Wrong number of argument" >&2
+  print_usage
+  exit -1
+fi
+
+which ffmpeg > /dev/null
+if [[ $? -ne 0 ]]; then
+  echo "You need to install ffmpeg (https://ffmpeg.org/download.html) to make use of this script."
+  exit -1
+fi
+ffmpeg_cmd="ffmpeg -loglevel warning"
+
+which catt > /dev/null
+if [[ $? -ne 0 ]]; then
+  echo "You need to install catt (https://github.com/skorokithakis/catt#installation) to make use of this script."
+  exit -1
+fi
+
+if [[ -z "$map" ]]; then
+  nb_subtitles=$($ffmpeg_cmd -i "$1" 2>&1 | grep "Subtitle:" | wc -l)
+  if [[ "$nb_subtitles" -ne 1 ]]; then
+    echo "There are more than one subtitle in the video file. Please specify the --map argument to this script." >&2
+    echo "You can get the list of subtitles by executing the following command:" >&2
+    echo "ffmpeg -i \"$1\" 2>&1 | grep \"Subtitle: \"" >&2
+    exit -1
+  else
+    map=$($ffmpeg_cmd -i "$1" 2>&1 | grep "Subtitle:" | cut -d "#" -f2 | cut -d "(" -f1)
+  fi
+else
+  ffmpeg -i "$1" 2>&1 | grep "Subtitle:" | grep $map > /dev/null
+  if [[ $? -ne 0 ]]; then
+    echo "Invalid map provided: $map"
+    exit -1
+  fi
+fi
+
+subtitles_file=$(mktemp --suffix=.srt --dry-run)
+
+echo "Extract subtitle from the video file"
+# From https://trac.ffmpeg.org/wiki/ExtractSubtitles
+# $ffmpeg_cmd -i "$1" -map "$map" "$subtitles_file"
+$ffmpeg_cmd -i "$1" -map "$map" "$subtitles_file"
+
+echo "End of subtitle extraction, start to cast the video file"
+catt cast --subtitles "$subtitles_file" "$1"

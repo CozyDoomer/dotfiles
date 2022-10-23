@@ -17,9 +17,10 @@ message/rfc822=userapp-Thunderbird.desktop
 application/pdf=zathura.desktop
 application/x-bittorrent=qbittorrent.desktop
 x-scheme-handler/msteams=teams.desktop
-inode/directory=ranger.desktop
+inode/directory=userapp-kitty -e ranger-6UQAG1.desktop
 x-scheme-handler/kite=kite-copilot.desktop
 x-scheme-handler/discord-418794856081653760=discord-418794856081653760.desktop
+x-scheme-handler/discord-402572971681644545=discord-402572971681644545.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
@@ -43,3 +44,6 @@ text/calendar=teams.desktop;
 application/epub+zip=zathura.desktop;
 application/vnd.ms-publisher=nvim.desktop;
 application/octet-stream=nvim.desktop;
+inode/directory=userapp-kitty -e ranger-6UQAG1.desktop;
+
+[Removed Associations]

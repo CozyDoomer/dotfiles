@@ -26,6 +26,7 @@ galculator
 xournalpp
 zathura
 zathura-pdf-mupdf
+foliate
 
 npm
 yarn

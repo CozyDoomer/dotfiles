@@ -60,4 +60,4 @@ EOF
 # theme="${themes[$(( $RANDOM % 12 ))]}"
 
 echo $dir/"$theme"
-rofi -no-lazy-grab -show drun -modi drun -theme $dir/"$theme"
+zensu rofi -no-lazy-grab -show drun -modi drun -theme $dir/"$theme"

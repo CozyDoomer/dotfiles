@@ -63,7 +63,7 @@ def restart_polybar(main_monitor_name):
             )
 
 
-def launch_rice(wallpaper_path, main_monitor_name='DP-4'):
+def launch_rice(wallpaper_path, main_monitor_name='DP-2'):
     import time
     start_time = time.time()
     home = os.path.expanduser('~')

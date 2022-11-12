@@ -7,9 +7,13 @@ an executable
 ]]
 
 -- general
+vim.cmd("set timeoutlen=50")
+
 lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "tokyonight"
+
+lvim.builtin.dap.active = true
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -21,6 +25,8 @@ lvim.keys.normal_mode["<S-l>"] = ":bnext<cr>"
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+lvim.keys.insert_mode["jk"] = "<ESC>"
+lvim.keys.insert_mode["kj"] = "<ESC>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -52,7 +58,6 @@ lvim.builtin.which_key.mappings["r"] = {
 }
 
 lvim.builtin.which_key.mappings["S"] = {"Search and Replace"}
-lvim.builtin.which_key.mappings["Sr"] = {":lua require('spectre').open_visual()<CR>", "Search and replace"}
 lvim.builtin.which_key.mappings["Sw"] = {":lua require('spectre').open_visual({select_word=true})<CR>", "Search and replace selection"}
 lvim.builtin.which_key.mappings["Sf"] = {"viw:lua require('spectre').open_file_search()<cr>", "Open file search"}
 lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
@@ -160,7 +165,7 @@ linters.setup {
   },
 }
 
-lvim.builtin.telescope.on_config_done = function()
+lvim.builtin.telescope.on_config_done = function(telescope)
   local actions = require "telescope.actions"
   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
@@ -219,6 +224,46 @@ lvim.plugins = {
     {"aurieh/discord.nvim"},
     {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
     -- :call doge#install()
+    {
+      "mfussenegger/nvim-dap",
+      config = function()
+        require("lvim.core.dap").setup()
+      end,
+    disable = not lvim.builtin.dap.active
+    },
+    {"Pocco81/DAPInstall.nvim"},
+    {"rcarriga/nvim-dap-ui"}
 }
 vim.g["doge_doc_standard_python"] = "numpy"
-vim.opt.colorcolumn = "79"
+vim.opt.colorcolumn = "88"
+
+-- TODO: try this out:
+-- vnoremap <leader><something> :s//g<left><left>
+local dap = require('dap')
+dap.adapters.python = {
+  type = 'executable';
+  command = '/home/cozy/miniconda/bin/python';
+  args = { '-m', 'debugpy.adapter' };
+}
+dap.configurations.python = {
+  {
+    -- The first three options are required by nvim-dap
+    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+    request = 'launch';
+    name = "Launch file";
+
+    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+    program = "${file}"; -- This configuration will launch the current file if used.
+    pythonPath = function()
+      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+      local handle = assert(io.popen('poetry env info -p', 'r'))
+      local output = assert(handle:read('*a'))
+      local result = string.gsub(output, '\n', '') .. '/bin/python'
+      handle:close()
+      return result
+    end;
+  },
+}

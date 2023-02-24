@@ -12,7 +12,6 @@ feh
 python-pywal
 python-i3ipc
 sassc
-nerd-fonts-terminus
 
 firefox
 libreoffice-still

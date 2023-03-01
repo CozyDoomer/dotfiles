@@ -18,6 +18,7 @@ libreoffice-still
 discord
 steam
 pulseaudio
+pavucontrol
 docker
 docker-compose
 flameshot

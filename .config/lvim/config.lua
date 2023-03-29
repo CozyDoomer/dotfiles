@@ -5,7 +5,6 @@ filled in as strings with either
 a global executable or a path to
 an executable
 ]]
-
 -- general
 vim.cmd("set timeoutlen=50")
 
@@ -56,12 +55,19 @@ lvim.builtin.which_key.mappings["r"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
+lvim.builtin.which_key.mappings["S"] = {
+  name = "Session",
+  c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+  l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+  Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+}
 
-lvim.builtin.which_key.mappings["S"] = {"Search and Replace"}
-lvim.builtin.which_key.mappings["Sw"] = {":lua require('spectre').open_visual({select_word=true})<CR>", "Search and replace selection"}
-lvim.builtin.which_key.mappings["Sf"] = {"viw:lua require('spectre').open_file_search()<cr>", "Open file search"}
-lvim.builtin.which_key.mappings["t"] = {":ToggleTerm size=12 direction=horizontal<CR>", "Terminal"}
-lvim.builtin.which_key.mappings["D"] = {":DogeGenerate<CR>", "Python docstring"}
+lvim.builtin.which_key.mappings["R"] = { "Search and Replace" }
+lvim.builtin.which_key.mappings["Rw"] = { ":lua require('spectre').open_visual({select_word=true})<CR>",
+  "Search and replace selection" }
+lvim.builtin.which_key.mappings["Rf"] = { "viw:lua require('spectre').open_file_search()<cr>", "Open file search" }
+lvim.builtin.which_key.mappings["t"] = { ":ToggleTerm size=12 direction=horizontal<CR>", "Terminal" }
+lvim.builtin.which_key.mappings["D"] = { ":DogeGenerate<CR>", "Python docstring" }
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
@@ -110,6 +116,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
+
   --Enable completion triggered by <c-x><c-o>
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
@@ -176,85 +183,135 @@ end
 
 -- Additional Plugins
 lvim.plugins = {
-    {"lunarvim/colorschemes"},
-    {"folke/tokyonight.nvim"},
-    {
-        "ray-x/lsp_signature.nvim",
-        config = function() require"lsp_signature".on_attach() end,
-        event = "InsertEnter"
-    },
-    {
-      "kevinhwang91/nvim-bqf",
-      event = { "BufRead", "BufNew" },
-      config = function()
+  { "lunarvim/colorschemes" },
+  { "folke/tokyonight.nvim" },
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function() require "lsp_signature".on_attach() end,
+    event = "InsertEnter"
+  },
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+  },
+  {
+    "phaazon/hop.nvim",
+    event = "BufRead",
+    config = function()
+      require("hop").setup()
+      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+      vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
+    end,
+  },
+  { "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup {
+          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+        }
+      end, 100)
+    end,
+  },
+  { "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua", "nvim-cmp" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    event = { "BufRead", "BufNew" },
+    config = function()
       require("bqf").setup({
-              auto_enable = true,
-              preview = {
-              win_height = 12,
-              win_vheight = 12,
-              delay_syntax = 80,
-              border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
-            },
-              func_map = {
-              vsplit = "",
-              ptogglemode = "z,",
-              stoggleup = "",
-            },
-              filter = {
-              fzf = {
-              action_for = { ["ctrl-s"] = "split" },
-              extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
-            },
+        auto_enable = true,
+        preview = {
+          win_height = 12,
+          win_vheight = 12,
+          delay_syntax = 80,
+          border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+        },
+        func_map = {
+          vsplit = "",
+          ptogglemode = "z,",
+          stoggleup = "",
+        },
+        filter = {
+          fzf = {
+            action_for = { ["ctrl-s"] = "split" },
+            extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+          },
         },
       })
-      end,
-    },
-    {
-      "windwp/nvim-spectre",
-      event = "BufRead",
-      config = function()
-        require("spectre").setup()
-      end,
-    },
-    {
+    end,
+  },
+  {
+    "windwp/nvim-spectre",
+    event = "BufRead",
+    config = function()
+      require("spectre").setup()
+    end,
+  },
+  {
     "folke/trouble.nvim",
-        cmd = "TroubleToggle",
-    },
-    {"tpope/vim-fugitive"},
-    {"aurieh/discord.nvim"},
-    {"kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
-    -- :call doge#install()
-    {
-      "mfussenegger/nvim-dap",
-      config = function()
-        require("lvim.core.dap").setup()
-      end,
-    disable = not lvim.builtin.dap.active
-    },
-    {"Pocco81/DAPInstall.nvim"},
-    {"rcarriga/nvim-dap-ui"}
+    cmd = "TroubleToggle",
+  },
+  { "tpope/vim-fugitive" },
+  { "kkoomen/vim-doge",  doge_doc_standard_python = 'numpy' },
+  -- :call doge#install()
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      require("lvim.core.dap").setup()
+    end,
+    enable = lvim.builtin.dap.active
+  },
+  { "Pocco81/DAPInstall.nvim" },
+  { "rcarriga/nvim-dap-ui" },
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    lazy = "true",
+    config = function()
+      require("persistence").setup {
+        dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+        options = { "buffers", "curdir", "tabpages", "winsize" },
+      }
+    end,
+  },
 }
 vim.g["doge_doc_standard_python"] = "numpy"
 vim.opt.colorcolumn = "88"
+
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
 -- TODO: try this out:
 -- vnoremap <leader><something> :s//g<left><left>
 local dap = require('dap')
 dap.adapters.python = {
-  type = 'executable';
-  command = '/home/cozy/miniconda/bin/python';
-  args = { '-m', 'debugpy.adapter' };
+  type = 'executable',
+  command = '/home/christian/miniconda3/bin/python',
+  args = { '-m', 'debugpy.adapter' },
 }
 dap.configurations.python = {
   {
     -- The first three options are required by nvim-dap
-    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch';
-    name = "Launch file";
+    type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
+    request = 'launch',
+    name = "Launch file",
 
     -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 
-    program = "${file}"; -- This configuration will launch the current file if used.
+    program = "${file}", -- This configuration will launch the current file if used.
     pythonPath = function()
       -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
       -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
@@ -264,6 +321,6 @@ dap.configurations.python = {
       local result = string.gsub(output, '\n', '') .. '/bin/python'
       handle:close()
       return result
-    end;
+    end,
   },
 }

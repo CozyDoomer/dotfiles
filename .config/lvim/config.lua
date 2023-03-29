@@ -257,7 +257,7 @@ lvim.plugins = {
     cmd = "TroubleToggle",
   },
   { "tpope/vim-fugitive" },
-  { "kkoomen/vim-doge",  doge_doc_standard_python = 'numpy' },
+  { "kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
   -- :call doge#install()
   {
     "mfussenegger/nvim-dap",
@@ -279,7 +279,7 @@ lvim.plugins = {
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    lazy = "true",
+    lazy = "persistence",
     config = function()
       require("persistence").setup {
         dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),

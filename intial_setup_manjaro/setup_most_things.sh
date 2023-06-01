@@ -24,11 +24,11 @@ sudo systemctl enable --now cups.socket
 sudo systemctl enable --now cups.path
 
 ## build aur packages
+# vim bindings htop
+pamac build htop-vim
+
 # keyboard
 pamac build zsa-wally-bin
-
-# mic noise suppression
-pamac build noise-suppression-for-voice
 
 # secondary editor
 pamac build vscodium-bin

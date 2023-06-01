@@ -63,13 +63,10 @@ def restart_polybar(main_monitor_name):
             )
 
 
-def launch_rice(wallpaper_path, main_monitor_name='DP-2'):
-    import time
-    start_time = time.time()
+def launch_rice(wallpaper_path, main_monitor_name='DP-0'):
     home = os.path.expanduser('~')
     wallpaper_path = wallpaper_path.replace('~', home)
-    print("after home dir")
-    print(start_time - time.time())
+
     if os.path.isdir(wallpaper_path):
         wallpaper_paths = os.listdir(wallpaper_path)
         wallpaper = random.choice(wallpaper_paths)
@@ -83,29 +80,18 @@ def launch_rice(wallpaper_path, main_monitor_name='DP-2'):
                 wallpaper_path = f'{wallpaper_dir}/{wallpaper_name}'
                 break
 
-    print("after getting WP")
-    print(start_time - time.time())
-
     # launch pywal to set colors and have access to them in cache
     os.system(f'wal --saturate 0.8 -i {wallpaper_path} -n')
-    print("after wal")
-    print(start_time - time.time())
 
     # set colors in env
     colors_config = json.load(open(f'{home}/.cache/wal/colors.json'))
     set_colors_env_var(colors_config)
-    print("after setting env vars")
-    print(start_time - time.time())
 
     # restart_polybar polybar
     restart_polybar(main_monitor_name)
-    print("after restarting polybar")
-    print(start_time - time.time())
 
     # Call 'feh' to set the wallpaper.
     os.system(f'/usr/bin/feh --bg-scale --no-xinerama {wallpaper_path}')
-    print("after feh")
-    print(start_time - time.time())
 
 
 def parse_cli_arguments():

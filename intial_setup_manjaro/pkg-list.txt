@@ -19,6 +19,7 @@ discord
 steam
 pulseaudio
 pavucontrol
+playerctl
 docker
 docker-compose
 flameshot

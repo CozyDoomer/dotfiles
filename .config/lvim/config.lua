@@ -44,6 +44,9 @@ lvim.builtin.telescope.defaults.mappings = {
     ["<C-k>"] = actions.move_selection_previous,
   },
 }
+lvim.builtin.which_key.mappings["sl"] = {
+  ":Telescope resume<CR>", "Resume last search"
+}
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["r"] = {
@@ -100,7 +103,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- lvim.lsp.automatic_servers_installation = false
 
 -- -- Disable virtual text
-lvim.lsp.diagnostics.virtual_text = false
+vim.diagnostic.config({ virtual_text = false })
 
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`

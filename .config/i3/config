@@ -297,10 +297,12 @@ bindsym $mod+x exec python ~/.config/rice/rice.py '~/.config/wallpapers/3-monito
 
 # set bg, polybar, and i3 colors from default wallpaper
 bindsym $mod+z exec python ~/.config/rice/rice.py '~/.config/wallpapers/3-monitors/kurzgesagt.png'
+# bindsym $mod+z exec python ~/.config/rice/rice.py '~/.config/wallpapers/3-monitors/chess_wallpaper.jpg'
 # bindsym $mod+z exec python ~/.config/rice/rice.py '~/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 
 # default startup and on i3 reload
 exec_always --no-startup-id python ~/.config/rice/rice.py '~/.config/wallpapers/3-monitors/kurzgesagt.png'
+# exec_always --no-startup-id python ~/.config/rice/rice.py '~/.config/wallpapers/3-monitors/chess_wallpaper.jpg'
 # exec_always --no-startup-id python ~/.config/rice/rice.py '~/.config/wallpapers/2-monitors/sunset_forest_darker.jpg'
 
 # disable picom by default as it causes lag when playing videos

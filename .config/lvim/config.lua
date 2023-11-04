@@ -12,14 +12,20 @@ lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "tokyonight"
 
-lvim.builtin.dap.active = true
-
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+
+lvim.builtin.alpha.active = true
+lvim.builtin.terminal.active = true
+
+lvim.builtin.project.active = true
+lvim.builtin.nvimtree.setup.view.side = "right"
+
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-h>"] = ":bprev<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":bnext<cr>"
+lvim.keys.normal_mode["<C-w>o"] = ":only<cr>"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -44,8 +50,10 @@ lvim.builtin.telescope.defaults.mappings = {
     ["<C-k>"] = actions.move_selection_previous,
   },
 }
+
+-- Telescope last search binding: useful for resuming last search
 lvim.builtin.which_key.mappings["sl"] = {
-  ":Telescope resume<CR>", "Resume last search"
+  ":Telescope resume<CR>", "Resume telescope last search"
 }
 
 -- Use which-key to add extra bindings with the leader-key prefix
@@ -58,122 +66,46 @@ lvim.builtin.which_key.mappings["r"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
+-- session persistence bindings
 lvim.builtin.which_key.mappings["S"] = {
   name = "Session",
   c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
   l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
   Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
 }
+-- markdown preview bindings
+lvim.builtin.which_key.mappings["M"] = {
+  name = "Markdown",
+  p = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview" },
+  t = { "<cmd>MarkdownPreview<cr>", "Toggle markdown preview" },
+  s = { "<cmd>MarkdownPreviewStop<cr>", "Stop markdown preview" },
+}
 
+-- spectre search and replace bindings
 lvim.builtin.which_key.mappings["R"] = { "Search and Replace" }
 lvim.builtin.which_key.mappings["Rw"] = { ":lua require('spectre').open_visual({select_word=true})<CR>",
   "Search and replace selection" }
 lvim.builtin.which_key.mappings["Rf"] = { "viw:lua require('spectre').open_file_search()<cr>", "Open file search" }
+
+-- terminal
 lvim.builtin.which_key.mappings["t"] = { ":ToggleTerm size=12 direction=horizontal<CR>", "Terminal" }
+
+-- docsstring generator
 lvim.builtin.which_key.mappings["D"] = { ":DogeGenerate<CR>", "Python docstring" }
 
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.alpha.active = true
-lvim.builtin.terminal.active = true
+-- neotest bindings
+lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>",
+  "Test Method" }
+lvim.builtin.which_key.mappings["dM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+  "Test Method DAP" }
+lvim.builtin.which_key.mappings["df"] = {
+  "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Test Class" }
+lvim.builtin.which_key.mappings["dF"] = {
+  "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test Class DAP" }
+lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
 
-lvim.builtin.project.active = true
-lvim.builtin.nvimtree.setup.view.side = "right"
-
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "css",
-  "rust",
-  "java",
-  "yaml",
-}
-
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
-
--- generic LSP settings
-
--- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
-
--- -- Disable virtual text
-vim.diagnostic.config({ virtual_text = false })
-
--- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
--- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyright" })
-
--- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
-local opts = {} -- check the lspconfig documentation for a list of all possible options
-require("lvim.lsp.manager").setup("pylsp", opts)
-
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
-lvim.lsp.on_attach_callback = function(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-end
--- you can overwrite the null_ls setup table (useful for setting the root_dir function)
--- lvim.lsp.null_ls.setup = {
---   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
--- }
--- or if you need something more advanced
--- lvim.lsp.null_ls.setup.root_dir = function(fname)
---   if vim.bo.filetype == "javascript" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
---       or require("lspconfig/util").path.dirname(fname)
---   elseif vim.bo.filetype == "php" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
---   else
---     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
---   end
--- end
-
--- -- set a formatter, this will override the language server formatting capabilities (if it exists)
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  { exe = "black", filetypes = { "python" } },
-  { exe = "isort", filetypes = { "python" } },
-  {
-    exe = "prettier",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    args = { "--print-with", "100" },
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "typescript", "typescriptreact" },
-  },
-}
-
--- -- set additional linters
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { exe = "flake8", filetypes = { "python" } },
-  {
-    exe = "shellcheck",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    args = { "--severity", "warning" },
-  },
-  {
-    exe = "codespell",
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "javascript", "python" },
-  },
-  {
-    exe = "eslint_d",
-    filetypes = { "javascript", "javascriptreact" },
-  },
-}
+-- binding for environment switching
+lvim.builtin.which_key.mappings["C"] = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" }
 
 lvim.builtin.telescope.on_config_done = function(telescope)
   local actions = require "telescope.actions"
@@ -186,6 +118,9 @@ end
 
 -- Additional Plugins
 lvim.plugins = {
+  { "AckslD/swenv.nvim" },
+  { "stevearc/dressing.nvim" },
+  { "mfussenegger/nvim-dap-python" },
   { "lunarvim/colorschemes" },
   { "folke/tokyonight.nvim" },
   {
@@ -260,17 +195,8 @@ lvim.plugins = {
     cmd = "TroubleToggle",
   },
   { "tpope/vim-fugitive" },
-  { "kkoomen/vim-doge", doge_doc_standard_python = 'numpy' },
+  { "kkoomen/vim-doge",  doge_doc_standard_python = 'numpy' },
   -- :call doge#install()
-  {
-    "mfussenegger/nvim-dap",
-    config = function()
-      require("lvim.core.dap").setup()
-    end,
-    enable = lvim.builtin.dap.active
-  },
-  { "Pocco81/DAPInstall.nvim" },
-  { "rcarriga/nvim-dap-ui" },
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
@@ -290,40 +216,162 @@ lvim.plugins = {
       }
     end,
   },
-}
-vim.g["doge_doc_standard_python"] = "numpy"
-vim.opt.colorcolumn = "88"
-
-lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
-table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
-
--- TODO: try this out:
--- vnoremap <leader><something> :s//g<left><left>
-local dap = require('dap')
-dap.adapters.python = {
-  type = 'executable',
-  command = '/home/christian/miniconda3/bin/python',
-  args = { '-m', 'debugpy.adapter' },
-}
-dap.configurations.python = {
   {
-    -- The first three options are required by nvim-dap
-    type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch',
-    name = "Launch file",
-
-    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
-    program = "${file}", -- This configuration will launch the current file if used.
-    pythonPath = function()
-      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-      local handle = assert(io.popen('poetry env info -p', 'r'))
-      local output = assert(handle:read('*a'))
-      local result = string.gsub(output, '\n', '') .. '/bin/python'
-      handle:close()
-      return result
-    end,
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
+    },
   },
 }
+
+-- if you don't want all the parsers change this to a table of the ones you want
+lvim.builtin.treesitter.ensure_installed = {
+  "bash",
+  "c",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "typescript",
+  "css",
+  "rust",
+  "java",
+  "yaml",
+}
+
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.highlight.enabled = true
+
+-- generic LSP settings
+
+-- ---@usage disable automatic installation of servers
+-- lvim.lsp.automatic_servers_installation = false
+
+-- -- Disable virtual text
+vim.diagnostic.config({ virtual_text = false })
+
+-- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
+-- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
+-- vim.list_extend(lvim.lsp.override, { "pyright" })
+
+---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
+local opts = {} -- check the lspconfig documentation for a list of all possible options
+require("lvim.lsp.manager").setup("pylsp", opts)
+
+-- you can set a custom on_attach function that will be used for all the language servers
+-- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
+lvim.lsp.on_attach_callback = function(client, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+-- you can overwrite the null_ls setup table (useful for setting the root_dir function)
+-- lvim.lsp.null_ls.setup = {
+--   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
+-- }
+-- or if you need something more advanced
+-- lvim.lsp.null_ls.setup.root_dir = function(fname)
+--   if vim.bo.filetype == "javascript" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
+--       or require("lspconfig/util").path.dirname(fname)
+--   elseif vim.bo.filetype == "php" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
+--   else
+--     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
+--   end
+-- end
+
+-- -- set a formatter, this will override the language server formatting capabilities (if it exists)
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { exe = "black", filetypes = { "python" } },
+  { exe = "isort", filetypes = { "python" } },
+  {
+    exe = "prettier",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    args = { "--print-with", "100" },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact" },
+  },
+}
+
+-- -- set additional linters
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { exe = "flake8", args = { "--ignore=E203", "--max-line-length=88" }, filetypes = { "python" } },
+  {
+    exe = "shellcheck",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    args = { "--severity", "warning" },
+  },
+  {
+    exe = "codespell",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "javascript", "python" },
+  },
+  {
+    exe = "eslint_d",
+    filetypes = { "javascript", "javascriptreact" },
+  },
+}
+-- setup debug adapter
+lvim.builtin.dap.active = true
+local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
+pcall(function()
+  require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
+end)
+
+-- setup testing
+require("neotest").setup({
+  adapters = {
+    require("neotest-python")({
+      -- Extra arguments for nvim-dap configuration
+      -- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
+      dap = {
+        justMyCode = false,
+        console = "integratedTerminal",
+      },
+      args = { "--log-level", "DEBUG", "--quiet" },
+      runner = "pytest",
+    })
+  }
+})
+
+require('swenv').setup({
+  -- other options
+  venvs_path = vim.fn.expand('~/.cache/pypoetry/virtualenvs'),
+
+  get_venvs = function (venvs_path)
+    local venvs = require('swenv.api').get_venvs()
+    local more_venvs = {}
+    local scan_dir = require('plenary.scandir').scan_dir
+    local _, Path = pcall(require, 'plenary.path')
+    -- poetry venv source
+    local paths = scan_dir(venvs_path, { depth = 1, only_dirs = true, silent = true })
+    for _, path in ipairs(paths) do
+      table.insert(more_venvs, {
+        name = Path:new(path):make_relative(venvs_path),
+        path = path,
+        source = 'poetry',
+      })
+    end
+    return vim.tbl_deep_extend("keep", venvs, more_venvs)
+  end
+})
+
+-- docstring generator format
+vim.g["doge_doc_standard_python"] = "numpy"
+
+-- columns for max line length of black
+vim.opt.colorcolumn = "88"
+
+-- copilot setup
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })

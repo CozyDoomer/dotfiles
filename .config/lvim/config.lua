@@ -218,6 +218,7 @@ lvim.plugins = {
   },
   {
     "nvim-neotest/neotest",
+    commit="e8ed1ac5562bf1a9002fc1d49ae6b0a6a83d1d4d",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",

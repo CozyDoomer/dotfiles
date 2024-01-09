@@ -363,7 +363,18 @@ require('swenv').setup({
         source = 'poetry',
       })
     end
-    return vim.tbl_deep_extend("keep", venvs, more_venvs)
+
+    local function tableMerge(result, ...)
+      for _, t in ipairs({...}) do
+        for _, v in ipairs(t) do
+          table.insert(result, v)
+        end
+      end
+    end
+
+    local merged_venvs = {}
+    tableMerge(merged_venvs, venvs, more_venvs)
+    return merged_venvs
   end
 })
 

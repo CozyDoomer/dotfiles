@@ -107,6 +107,46 @@ lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.t
 -- binding for environment switching
 lvim.builtin.which_key.mappings["C"] = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" }
 
+lvim.builtin.which_key.vmappings["r"] = {
+  name = "+Refactor",
+  -- Extract supports only visual mode
+  e = { "<cmd>lua require('refactoring').refactor('Extract Function')<cr>", "Extract Function" },
+  f = { "<cmd>lua require('refactoring').refactor('Extract Function To File')<cr>", "Extract Function To File" },
+  v = { "<cmd>lua require('refactoring').refactor('Extract Variable')<cr>", "Extract Variable" },
+}
+
+lvim.builtin.which_key.mappings["r"] = {
+  name = "+Refactor",
+  -- supports only normal
+  i = { "<cmd>lua require('refactoring').refactor('Inline Variable')<cr>", "Inline Variable" },
+  I = { "<cmd>lua require('refactoring').refactor('Inline Function')<cr>", "Inline Function" },
+  b = { "<cmd>lua require('refactoring').refactor('Extract Block')<cr>", "Extract Block" },
+  B = { "<cmd>lua require('refactoring').refactor('Extract Block To File')<cr>", "Extract Block To File" },
+}
+
+-- Avante (ai chat) bindings
+lvim.builtin.which_key.mappings["a"] = {
+  name = "Avante",
+  a = { "<cmd>AvanteToggle<CR>", "Toggle Sidebar" },
+  r = { "<cmd>AvanteRefresh<CR>", "Refresh Sidebar" },
+  f = { "<cmd>AvanteFocus<CR>", "Focus Sidebar" },
+  n = { "<cmd>lua require('avante').goto_next()<CR>", "Next Block" },
+  p = { "<cmd>lua require('avante').goto_prev()<CR>", "Previous Block" },
+  s = { "<cmd>AvanteAsk<CR>", "Ask About File" },
+}
+
+lvim.builtin.which_key.vmappings["a"] = {
+  name = "Avante",
+  e = {
+    function()
+      vim.cmd("normal! gv")
+      vim.cmd("AvanteEdit")
+    end,
+    "Edit Selected Code"
+  },
+  s = { "<cmd>AvanteAsk<CR>", "Ask About Selection" },
+}
+
 lvim.builtin.telescope.on_config_done = function(telescope)
   local actions = require "telescope.actions"
   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
@@ -141,22 +181,6 @@ lvim.plugins = {
       vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
     end,
   },
-  { "zbirenbaum/copilot.lua",
-    event = { "VimEnter" },
-    config = function()
-      vim.defer_fn(function()
-        require("copilot").setup {
-          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
-        }
-      end, 100)
-    end,
-  },
-  { "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua", "nvim-cmp" },
-    config = function()
-      require("copilot_cmp").setup()
-    end,
-  },
   {
     "kevinhwang91/nvim-bqf",
     event = { "BufRead", "BufNew" },
@@ -185,7 +209,7 @@ lvim.plugins = {
   },
   {
     "windwp/nvim-spectre",
-    event = "BufRead",
+    event = "bufread",
     config = function()
       require("spectre").setup()
     end,
@@ -218,11 +242,98 @@ lvim.plugins = {
   },
   {
     "nvim-neotest/neotest",
-    commit="e8ed1ac5562bf1a9002fc1d49ae6b0a6a83d1d4d",
+    commit = "e8ed1ac5562bf1a9002fc1d49ae6b0a6a83d1d4d",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-neotest/neotest-python",
+    },
+  },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("refactoring").setup()
+    end,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup {
+          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+        }
+      end, 100)
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua", "nvim-cmp" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false,
+    opts = {
+      -- add any opts here
+      provider = "claude",        -- or your preferred provider
+      behaviour = {
+        auto_suggestions = false, -- Experimental stage
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+      },
+      windows = {
+        position = "right",
+        width = 30,
+      },
+      hints = {
+        enabled = false
+      }
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      -- "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
     },
   },
 }
@@ -253,13 +364,34 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- -- Disable virtual text
 vim.diagnostic.config({ virtual_text = false })
 
--- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
+---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyright" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 
----@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
-local opts = {} -- check the lspconfig documentation for a list of all possible options
-require("lvim.lsp.manager").setup("pylsp", opts)
+local pyright_opts = {
+  single_file_support = true,
+  settings = {
+    pyright = {
+      disableLanguageServices = false,
+      disableOrganizeImports = false
+    },
+    python = {
+      analysis = {
+        autoImportCompletions = true,
+        autoSearchPaths = true,
+        diagnosticMode = "workspace", -- openFilesOnly, workspace
+        typeCheckingMode = "basic",   -- off, basic, strict
+        useLibraryCodeForTypes = true
+      }
+    }
+  },
+}
+
+require("lvim.lsp.manager").setup("pyright", pyright_opts)
+
+-- --@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
+-- local opts = {} -- check the lspconfig documentation for a list of all possible options
+-- require("lvim.lsp.manager").setup("pylsp", opts)
 
 -- you can set a custom on_attach function that will be used for all the language servers
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
@@ -318,7 +450,7 @@ linters.setup {
     filetypes = { "javascript", "python" },
   },
   {
-    exe = "eslint_d",
+    exe = "eslint",
     filetypes = { "javascript", "javascriptreact" },
   },
 }
@@ -348,8 +480,7 @@ require("neotest").setup({
 require('swenv').setup({
   -- other options
   venvs_path = vim.fn.expand('~/.cache/pypoetry/virtualenvs'),
-
-  get_venvs = function (venvs_path)
+  get_venvs = function(venvs_path)
     local venvs = require('swenv.api').get_venvs()
     local more_venvs = {}
     local scan_dir = require('plenary.scandir').scan_dir
@@ -365,7 +496,7 @@ require('swenv').setup({
     end
 
     local function tableMerge(result, ...)
-      for _, t in ipairs({...}) do
+      for _, t in ipairs({ ... }) do
         for _, v in ipairs(t) do
           table.insert(result, v)
         end
@@ -378,12 +509,25 @@ require('swenv').setup({
   end
 })
 
+-- copilot settings
+local ok, copilot = pcall(require, "copilot")
+if not ok then
+  return
+end
+
+copilot.setup {
+  suggestion = {
+    keymap = {
+      accept = "<c-l>",
+      next = "<c-j>",
+      prev = "<c-k>",
+      dismiss = "<c-h>",
+    },
+  },
+}
+
 -- docstring generator format
 vim.g["doge_doc_standard_python"] = "numpy"
 
 -- columns for max line length of black
 vim.opt.colorcolumn = "88"
-
--- copilot setup
-lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
-table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })

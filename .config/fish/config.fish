@@ -1,7 +1,7 @@
 set -U fish_greeting ""
 
 export VISUAL="vscodium"
-export EDITOR="lvim"
+export EDITOR="nvim"
 export BROWSER="firefox"
 
 export timestamp_timeout=60
@@ -27,7 +27,6 @@ set -x -U LESS_TERMCAP_us (printf "\e[01;32m")
 # Always use the default keybindings in fish
 fish_default_key_bindings
 
-alias nvim="lvim"
 alias ssh="kitty +kitten ssh"
 
 # Use exa as a drop-in replacement for ls and tree (faster, more colors, etc.)
@@ -72,7 +71,6 @@ if not set -q set_abbr
     abbr l "ls -l"
     abbr T tree
     abbr r ranger
-    abbr lv lvim
 end
 
 function bwl

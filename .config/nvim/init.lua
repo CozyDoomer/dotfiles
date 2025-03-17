@@ -55,3 +55,9 @@ require("swenv").setup {
 require("notify").setup {
   top_down = false,
 }
+
+-- use system clipboard
+vim.opt.clipboard = "unnamedplus"
+
+-- 88 character length soft limit
+vim.opt.colorcolumn = "88"

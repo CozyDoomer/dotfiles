@@ -63,6 +63,9 @@ return {
         ["<Leader>lj"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" },
 
         ["<Leader>E"] = { "<cmd>lua require('swenv.api').pick_venv()<cr>", desc = "Choose python env" },
+
+        ["<Leader>Ac"] = { ":AvanteClear<cr>", desc = "avante: clear" },
+
         ["<Leader>t"] = { ":ToggleTerm size=12 direction=horizontal<cr>", desc = "Terminal" },
 
         -- tables with just a `desc` key will be registered with which-key if it's installed

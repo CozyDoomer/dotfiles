@@ -11,10 +11,8 @@ return {
   { import = "astrocommunity.test.neotest" },
   { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
   { import = "astrocommunity.editing-support.neogen" },
-  -- { import = "astrocommunity.editing-support.refactoring-nvim" },
   { import = "astrocommunity.search.nvim-spectre" },
   { import = "astrocommunity.quickfix.nvim-bqf" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.python" },
-  
 }

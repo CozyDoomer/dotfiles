@@ -2,7 +2,7 @@ set -U fish_greeting ""
 
 export VISUAL="vscodium"
 export EDITOR="nvim"
-export BROWSER="firefox"
+export BROWSER="zen-browser"
 
 export timestamp_timeout=60
 export timestamp_type=global

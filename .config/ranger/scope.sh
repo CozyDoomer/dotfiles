@@ -68,7 +68,7 @@ case "$extension" in
         try bsdtar -lf "$path" && { dump | trim; exit 0; }
         exit 1;;
     csv)
-	sed "s/\(.*\".*\),\(.*\".*\)/\1~\2/;s/,/\t/g;s/~/,/g;s/\t\"/\t/g;s/\"\t/\t/g" "$path" && { dump| trim; exit 0; } || exit 1;;
+	head -n "$maxln" "$path" && { dump; exit 0; } || exit 1;;
     rar)
         # avoid password prompt by providing empty password
         try unrar -p- lt "$path" && { dump | trim; exit 0; } || exit 1;;
@@ -77,9 +77,9 @@ case "$extension" in
         try 7z -p l "$path" && { dump | trim; exit 0; } || exit 1;;
     # PDF documents:
     pdf)
-	try pdftoppm -jpeg -singlefile "$path" "${cached//.jpg}" && exit 6 || exit 1;;
-        #try pdftotext -l 10 -nopgbrk -q "$path" - && \
-            #{ dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
+	# try pdftoppm -jpeg -singlefile "$path" "${cached//.jpg}" && exit 6 || exit 1;;
+        try pdftotext -l 1 -nopgbrk -q "$path" - && \
+            { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
     # BitTorrent Files
     torrent)
         try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;

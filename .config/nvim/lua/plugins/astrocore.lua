@@ -74,6 +74,9 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+
+        -- custom mapping names
+        ["<Leader>o"] = { desc = " Opencode" },
       },
       v = {
         ["<"] = { "<gv", desc = "Unindent and keep selection" },
